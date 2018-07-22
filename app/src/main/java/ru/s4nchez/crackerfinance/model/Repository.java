@@ -17,6 +17,28 @@ public class Repository {
                 Currencies.get().ruble(), 25000));
         mOperations.add(new Operation(OperationType.cost,
                 Currencies.get().ruble(), 350));
+        mOperations.add(new Operation(OperationType.cost,
+                Currencies.get().ruble(), 150));
+        mOperations.add(new Operation(OperationType.cost,
+                Currencies.get().ruble(), 55));
+        mOperations.add(new Operation(OperationType.cost,
+                Currencies.get().ruble(), 440));
+        mOperations.add(new Operation(OperationType.cost,
+                Currencies.get().ruble(), 315));
+        mOperations.add(new Operation(OperationType.cost,
+                Currencies.get().ruble(), 30));
+        mOperations.add(new Operation(OperationType.cost,
+                Currencies.get().ruble(), 1193));
+        mOperations.add(new Operation(OperationType.cost,
+                Currencies.get().ruble(), 550));
+        mOperations.add(new Operation(OperationType.cost,
+                Currencies.get().ruble(), 123));
+        mOperations.add(new Operation(OperationType.cost,
+                Currencies.get().ruble(), 12));
+        mOperations.add(new Operation(OperationType.cost,
+                Currencies.get().ruble(), 500));
+        mOperations.add(new Operation(OperationType.cost,
+                Currencies.get().ruble(), 540));
     };
 
     public static Repository get() {

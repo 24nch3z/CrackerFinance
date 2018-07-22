@@ -1,5 +1,6 @@
 package ru.s4nchez.crackerfinance.screens.about;
 
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,8 +13,6 @@ import ru.s4nchez.crackerfinance.databinding.FragmentAboutScreenBinding;
 
 public class FragmentAboutScreen extends Fragment {
 
-    private AboutScreenViewModel mViewModel;
-
     public static FragmentAboutScreen newInstance() {
         FragmentAboutScreen fragment = new FragmentAboutScreen();
         return fragment;
@@ -25,8 +24,18 @@ public class FragmentAboutScreen extends Fragment {
         FragmentAboutScreenBinding binding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_about_screen, container, false);
 
-        mViewModel = new AboutScreenViewModel();
-        binding.setViewModel(mViewModel);
+        String versionName = null;
+        try {
+            versionName = getActivity().getPackageManager()
+                    .getPackageInfo(getActivity().getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // TODO: Вынести в строки
+        if (versionName != null) {
+            binding.version.setText( "Версия приложения: " + versionName);
+        }
 
         return binding.getRoot();
     }

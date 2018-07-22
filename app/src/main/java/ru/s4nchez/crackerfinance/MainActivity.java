@@ -18,16 +18,19 @@ import ru.s4nchez.crackerfinance.screens.settings.FragmentSettingsScreen;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        mToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = fm.findFragmentById(R.id.container);
         if (fragment == null) {
             setFragment(FragmentMainScreen.newInstance());
+            setToolbarText("Главная");
         }
     }
 
@@ -58,15 +62,22 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_main) {
             setFragment(FragmentMainScreen.newInstance());
+            setToolbarText("Главная");
         } else if (id == R.id.nav_settings) {
             setFragment(FragmentSettingsScreen.newInstance());
+            setToolbarText("Настройки");
         } else if (id == R.id.nav_about) {
             setFragment(FragmentAboutScreen.newInstance());
+            setToolbarText("О приложении");
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void setToolbarText(String message) {
+        mToolbar.setTitle(message);
     }
 
     private void setFragment(Fragment fragment) {

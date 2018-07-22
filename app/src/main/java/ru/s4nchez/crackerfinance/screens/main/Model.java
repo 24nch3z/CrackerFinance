@@ -16,7 +16,7 @@ public class Model {
     public Model(Cracker cracker, Repository repository) {
         mCracker = cracker;
         mRepository = repository;
-        mCurrency = Currencies.get().ruble();
+        mCurrency = Currencies.get().dollar();
         calculateTotal();
     }
 
