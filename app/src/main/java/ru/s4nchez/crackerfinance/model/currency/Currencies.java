@@ -4,13 +4,8 @@ public class Currencies {
 
     private static Currencies sCurrencies;
 
-    private Currency mRuble;
-    private Currency mDollar;
-
-    private Currencies() {
-        mRuble = new CurrencyRuble();
-        mDollar = new CurrencyDollar();
-    };
+    private Currency mRuble = new Currency("Рубль", "RUB", "\u20BD");
+    private Currency mDollar = new Currency("Доллар", "USD", "$");
 
     public static Currencies get() {
         if (sCurrencies == null) {

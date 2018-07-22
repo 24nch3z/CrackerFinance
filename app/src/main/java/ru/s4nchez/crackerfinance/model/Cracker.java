@@ -1,6 +1,5 @@
 package ru.s4nchez.crackerfinance.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ru.s4nchez.crackerfinance.model.currency.Currency;
@@ -8,17 +7,15 @@ import ru.s4nchez.crackerfinance.model.currency.Currency;
 public class Cracker {
 
     private Converter mConverter;
-    private List<Operation> mOperations;
 
     public Cracker() {
         mConverter = new Converter();
-        mOperations = new ArrayList<>();
     }
 
-    public double getTotal(Currency currency) {
+    public double getTotal(Currency currency, List<Operation> operations) {
         double total = 0, operationSum;
 
-        for (Operation operation : mOperations) {
+        for (Operation operation : operations) {
             operationSum = mConverter.converter(operation.getCurrency(),
                     currency, operation.getSum());
 
@@ -33,13 +30,5 @@ public class Cracker {
         }
 
         return total;
-    }
-
-    public List<Operation> getOperations() {
-        return mOperations;
-    }
-
-    public void addOperation(Operation operation) {
-        mOperations.add(operation);
     }
 }

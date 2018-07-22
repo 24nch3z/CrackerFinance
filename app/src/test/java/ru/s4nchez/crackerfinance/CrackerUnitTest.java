@@ -2,10 +2,13 @@ package ru.s4nchez.crackerfinance;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ru.s4nchez.crackerfinance.model.Cracker;
 import ru.s4nchez.crackerfinance.model.Operation;
 import ru.s4nchez.crackerfinance.model.OperationType;
-import ru.s4nchez.crackerfinance.model.currency.CurrencyRuble;
+import ru.s4nchez.crackerfinance.model.currency.Currencies;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,12 +18,15 @@ public class CrackerUnitTest {
     public void operations_isCorrect() {
         Cracker cracker = new Cracker();
 
-        cracker.addOperation(new Operation(OperationType.income,
-                new CurrencyRuble(), 6000));
-        cracker.addOperation(new Operation(OperationType.cost,
-                new CurrencyRuble(), 5000));
-        double total = cracker.getTotal(new CurrencyRuble());
+        List<Operation> operations = new ArrayList<>();
+        operations.add(new Operation(OperationType.income,
+                Currencies.get().ruble(), 25000));
+        operations.add(new Operation(OperationType.cost,
+                Currencies.get().ruble(), 9999));
 
-        assertEquals("getTotal error", 1000, total, 0);
+        double expected = 15001;
+        double actual = cracker.getTotal(Currencies.get().ruble(), operations);
+
+        assertEquals("getTotal error", expected, actual, 0);
     }
 }
