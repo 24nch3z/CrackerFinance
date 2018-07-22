@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import ru.s4nchez.crackerfinance.screens.about.FragmentAboutScreen;
 import ru.s4nchez.crackerfinance.screens.main.FragmentMainScreen;
 import ru.s4nchez.crackerfinance.screens.settings.FragmentSettingsScreen;
+import ru.s4nchez.crackerfinance.utils.MyToast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,7 +42,6 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = fm.findFragmentById(R.id.container);
         if (fragment == null) {
             setFragment(FragmentMainScreen.newInstance());
-            setToolbarText("Главная");
         }
     }
 

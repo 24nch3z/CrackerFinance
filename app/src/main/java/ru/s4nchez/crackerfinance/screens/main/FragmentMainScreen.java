@@ -34,7 +34,7 @@ public class FragmentMainScreen extends Fragment {
                 .inflate(inflater, R.layout.fragment_main_screen, container, false);
 
         mCracker = new Cracker();
-        mModel = new Model(mCracker, mRepository);
+        mModel = new Model(mCracker, mRepository, getContext());
         mViewModel = new MainScreenViewModel(mModel);
         binding.setViewModel(mViewModel);
 

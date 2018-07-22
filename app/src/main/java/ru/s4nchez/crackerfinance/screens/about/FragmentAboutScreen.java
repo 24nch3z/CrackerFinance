@@ -32,9 +32,8 @@ public class FragmentAboutScreen extends Fragment {
             e.printStackTrace();
         }
 
-        // TODO: Вынести в строки
         if (versionName != null) {
-            binding.version.setText( "Версия приложения: " + versionName);
+            binding.version.setText(getText(R.string.about_screen_version) + " " + versionName);
         }
 
         return binding.getRoot();
