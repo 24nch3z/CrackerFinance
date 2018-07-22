@@ -15,9 +15,9 @@ public class Repository {
         mOperations = new ArrayList<>();
         mOperations.add(new Operation(OperationType.income,
                 Currencies.get().ruble(), 25000));
-    }
-
-    ;
+        mOperations.add(new Operation(OperationType.cost,
+                Currencies.get().ruble(), 350));
+    };
 
     public static Repository get() {
         if (sRepository == null) {

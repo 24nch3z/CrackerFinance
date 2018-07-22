@@ -12,6 +12,7 @@ import ru.s4nchez.crackerfinance.R;
 import ru.s4nchez.crackerfinance.databinding.FragmentMainScreenBinding;
 import ru.s4nchez.crackerfinance.model.Cracker;
 import ru.s4nchez.crackerfinance.model.Repository;
+import ru.s4nchez.crackerfinance.screens.main.list.MyItemDecoration;
 import ru.s4nchez.crackerfinance.screens.main.list.OperationAdapter;
 
 public class FragmentMainScreen extends Fragment {
@@ -39,6 +40,7 @@ public class FragmentMainScreen extends Fragment {
 
         binding.recyclerView.setLayoutManager(
                 new LinearLayoutManager(getActivity()));
+        binding.recyclerView.addItemDecoration(new MyItemDecoration(20));
         binding.recyclerView.setAdapter(new OperationAdapter(
                 mRepository.getOperations(), getContext()));
 
