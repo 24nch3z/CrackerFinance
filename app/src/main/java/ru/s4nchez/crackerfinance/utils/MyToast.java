@@ -22,7 +22,7 @@ public class MyToast {
         return sMyToast;
     }
 
-    public void show(Object ... messages) {
+    public void show(Object... messages) {
         StringBuilder text = new StringBuilder();
 
         for (int i = 0; i < messages.length; i++) {

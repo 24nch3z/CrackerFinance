@@ -1,14 +1,18 @@
 package ru.s4nchez.crackerfinance.screens.main;
 
 import android.databinding.BaseObservable;
-
-import ru.s4nchez.crackerfinance.model.Cracker;
+import android.databinding.Bindable;
 
 public class MainScreenViewModel extends BaseObservable {
 
-    private Cracker mCracker;
+    private Model mModel;
 
-    public MainScreenViewModel(Cracker cracker) {
-        mCracker = cracker;
+    public MainScreenViewModel(Model model) {
+        mModel = model;
+    }
+
+    @Bindable
+    public Model getModel() {
+        return mModel;
     }
 }

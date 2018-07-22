@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tool="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -7,15 +8,17 @@
             type="ru.s4nchez.crackerfinance.screens.main.MainScreenViewModel"/>
     </data>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|center_horizontal"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -32,21 +35,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="136 $"
+                android:text='@{(int) viewModel.model.total + viewModel.model.currency.symbol}'
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/main_screen_balance_size"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="14325 ₽"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/main_screen_balance_size"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                tool:text="136$"/>
         </LinearLayout>
 
-    </FrameLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
 
 </layout>
