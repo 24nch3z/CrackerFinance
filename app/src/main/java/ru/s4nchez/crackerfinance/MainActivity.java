@@ -10,10 +10,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import ru.s4nchez.crackerfinance.screens.about.FragmentAboutScreen;
 import ru.s4nchez.crackerfinance.screens.main.FragmentMainScreen;
 import ru.s4nchez.crackerfinance.screens.settings.FragmentSettingsScreen;
+import ru.s4nchez.crackerfinance.utils.MyToast;
+import ru.terrakok.cicerone.Navigator;
+import ru.terrakok.cicerone.android.SupportFragmentNavigator;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,10 +41,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.container);
-        if (fragment == null) {
-            setFragment(FragmentMainScreen.newInstance());
+        if (savedInstanceState == null) {
+            MyApplication.instance.getRouter().replaceScreen(Screens.SCREEN_MAIN);
         }
     }
 
@@ -54,20 +56,60 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.instance.getNavigatorHolder().setNavigator(navigator);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MyApplication.instance.getNavigatorHolder().removeNavigator();
+    }
+
+    private Navigator navigator = new SupportFragmentNavigator(getSupportFragmentManager(),
+            R.id.container) {
+        @Override
+        protected Fragment createFragment(String screenKey, Object data) {
+            getSupportActionBar().setTitle(screenKey);
+            switch(screenKey) {
+                case Screens.SCREEN_MAIN:
+                    setToolbarText(getString(R.string.section_main));
+                    return FragmentMainScreen.newInstance();
+                case Screens.SCREEN_ABOUT:
+                    setToolbarText(getString(R.string.section_about));
+                    return FragmentAboutScreen.newInstance();
+                case Screens.SCREEN_SETTINGS:
+                    setToolbarText(getString(R.string.section_settings));
+                    return FragmentSettingsScreen.newInstance();
+                default:
+                    return FragmentMainScreen.newInstance();
+            }
+        }
+
+        @Override
+        protected void showSystemMessage(String message) {
+            MyToast.get(MainActivity.this).show(message);
+        }
+
+        @Override
+        protected void exit() {
+            finish();
+        }
+    };
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.nav_main) {
-            setFragment(FragmentMainScreen.newInstance());
-            setToolbarText("Главная");
+            MyApplication.instance.getRouter().replaceScreen(Screens.SCREEN_MAIN);
         } else if (id == R.id.nav_settings) {
-            setFragment(FragmentSettingsScreen.newInstance());
-            setToolbarText("Настройки");
+            MyApplication.instance.getRouter().replaceScreen(Screens.SCREEN_SETTINGS);
         } else if (id == R.id.nav_about) {
-            setFragment(FragmentAboutScreen.newInstance());
-            setToolbarText("О приложении");
+            MyApplication.instance.getRouter().replaceScreen(Screens.SCREEN_ABOUT);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -77,13 +119,5 @@ public class MainActivity extends AppCompatActivity
 
     private void setToolbarText(String message) {
         toolbar.setTitle(message);
-    }
-
-    private void setFragment(Fragment fragment) {
-        FragmentManager fm = getSupportFragmentManager();
-
-        fm.beginTransaction()
-                .replace(R.id.container, fragment)
-                .commit();
     }
 }
