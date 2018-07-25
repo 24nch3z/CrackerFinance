@@ -5,24 +5,24 @@ import java.util.Map;
 
 public class Rates {
 
-    private static Rates sRates;
+    private static Rates instance;
 
-    private Map<String, Double> mData;
+    private Map<String, Double> data;
 
     private Rates() {
-        mData = new HashMap<>();
-        mData.put("RUB-USD", 0.016d);
-        mData.put("USD-RUB", 63.28d);
+        data = new HashMap<>();
+        data.put("RUB-USD", 0.016d);
+        data.put("USD-RUB", 63.28d);
     }
 
     public static Rates get() {
-        if (sRates == null) {
-            sRates = new Rates();
+        if (instance == null) {
+            instance = new Rates();
         }
-        return sRates;
+        return instance;
     }
 
     public Map<String, Double> getData() {
-        return mData;
+        return data;
     }
 }

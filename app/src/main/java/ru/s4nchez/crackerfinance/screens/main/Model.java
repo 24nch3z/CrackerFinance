@@ -10,15 +10,14 @@ import ru.s4nchez.crackerfinance.model.currency.Currency;
 
 public class Model {
 
-    private Cracker mCracker;
-    private Repository mRepository;
-
-    private double mTotal;
-    private Currency mCurrency;
+    private Cracker cracker;
+    private Repository repository;
+    private double total;
+    private Currency currency;
 
     public Model(Cracker cracker, Repository repository, Context context) {
-        mCracker = cracker;
-        mRepository = repository;
+        this.cracker = cracker;
+        this.repository = repository;
         initCurrency(context);
         calculateTotal();
     }
@@ -26,22 +25,22 @@ public class Model {
     private void initCurrency(Context context) {
         String currencyCode = Settings.get().getCurrency(context);
         Currency currency = Currencies.get().getCurrencyByCode(currencyCode);
-        mCurrency = currency == null ? Currencies.get().ruble() : currency;
+        this.currency = currency == null ? Currencies.get().ruble() : currency;
     }
 
     public void calculateTotal() {
-        mTotal = mCracker.getTotal(mCurrency, mRepository.getOperations());
+        total = cracker.getTotal(currency, repository.getOperations());
     }
 
     public double getTotal() {
-        return mTotal;
+        return total;
     }
 
     public Currency getCurrency() {
-        return mCurrency;
+        return currency;
     }
 
     public void setCurrency(Currency currency) {
-        mCurrency = currency;
+        this.currency = currency;
     }
 }

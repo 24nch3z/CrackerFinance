@@ -5,14 +5,14 @@ import android.databinding.Bindable;
 
 public class MainScreenViewModel extends BaseObservable {
 
-    private Model mModel;
+    private Model model;
 
     public MainScreenViewModel(Model model) {
-        mModel = model;
+        this.model = model;
     }
 
     @Bindable
     public Model getModel() {
-        return mModel;
+        return model;
     }
 }

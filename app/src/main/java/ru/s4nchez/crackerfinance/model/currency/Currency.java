@@ -2,25 +2,25 @@ package ru.s4nchez.crackerfinance.model.currency;
 
 public class Currency {
 
-    private String mName;
-    private String mCode;
-    private String mSymbol;
+    final private String name;
+    final private String code;
+    final private String symbol;
 
     public Currency(String name, String code, String symbol) {
-        mName = name;
-        mCode = code;
-        mSymbol = symbol;
+        this.name = name;
+        this.code = code;
+        this.symbol = symbol;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public String getCode() {
-        return mCode;
+        return code;
     }
 
     public String getSymbol() {
-        return mSymbol;
+        return symbol;
     }
 }

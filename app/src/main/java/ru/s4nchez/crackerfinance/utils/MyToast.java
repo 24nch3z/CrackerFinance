@@ -5,21 +5,21 @@ import android.widget.Toast;
 
 public class MyToast {
 
-    private static MyToast sMyToast;
+    private static MyToast instance;
 
-    private Context mContext;
-    private Toast mToast;
+    private Context context;
+    private Toast toast;
 
     private MyToast(Context applicationContext) {
-        mContext = applicationContext.getApplicationContext();
-        mToast = Toast.makeText(mContext, "", Toast.LENGTH_SHORT);
+        context = applicationContext.getApplicationContext();
+        toast = Toast.makeText(context, "", Toast.LENGTH_SHORT);
     }
 
     public static MyToast get(Context context) {
-        if (sMyToast == null) {
-            sMyToast = new MyToast(context);
+        if (instance == null) {
+            instance = new MyToast(context);
         }
-        return sMyToast;
+        return instance;
     }
 
     public void show(Object... messages) {
@@ -30,7 +30,7 @@ public class MyToast {
             text.append("\n");
         }
 
-        mToast.setText(text.toString().trim());
-        mToast.show();
+        toast.setText(text.toString().trim());
+        toast.show();
     }
 }

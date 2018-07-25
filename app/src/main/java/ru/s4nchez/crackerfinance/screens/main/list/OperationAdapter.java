@@ -14,17 +14,17 @@ import ru.s4nchez.crackerfinance.model.Operation;
 
 public class OperationAdapter extends RecyclerView.Adapter<OperationHolder> {
 
-    private List<Operation> mItems;
-    private Context mContext;
+    private List<Operation> items;
+    private Context context;
 
     public OperationAdapter(List<Operation> items, Context context) {
-        mItems = items;
-        mContext = context;
+        this.items = items;
+        this.context = context;
     }
 
     @Override
     public OperationHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(mContext.getApplicationContext());
+        LayoutInflater inflater = LayoutInflater.from(context.getApplicationContext());
         ItemOperationBinding binding = DataBindingUtil
                 .inflate(inflater, R.layout.item_operation, parent, false);
         return new OperationHolder(binding);
@@ -32,12 +32,12 @@ public class OperationAdapter extends RecyclerView.Adapter<OperationHolder> {
 
     @Override
     public void onBindViewHolder(OperationHolder holder, int position) {
-        Operation operation = mItems.get(position);
+        Operation operation = items.get(position);
         holder.bind(operation);
     }
 
     @Override
     public int getItemCount() {
-        return mItems.size();
+        return items.size();
     }
 }

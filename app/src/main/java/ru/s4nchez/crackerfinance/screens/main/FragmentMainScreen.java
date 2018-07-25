@@ -17,10 +17,10 @@ import ru.s4nchez.crackerfinance.screens.main.list.OperationAdapter;
 
 public class FragmentMainScreen extends Fragment {
 
-    private MainScreenViewModel mViewModel;
-    private Model mModel;
-    private Cracker mCracker;
-    private Repository mRepository = Repository.get();
+    private MainScreenViewModel viewModel;
+    private Model model;
+    private Cracker cracker;
+    private Repository repository = Repository.get();
 
     public static FragmentMainScreen newInstance() {
         FragmentMainScreen fragment = new FragmentMainScreen();
@@ -33,16 +33,16 @@ public class FragmentMainScreen extends Fragment {
         FragmentMainScreenBinding binding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_main_screen, container, false);
 
-        mCracker = new Cracker();
-        mModel = new Model(mCracker, mRepository, getContext());
-        mViewModel = new MainScreenViewModel(mModel);
-        binding.setViewModel(mViewModel);
+        cracker = new Cracker();
+        model = new Model(cracker, repository, getContext());
+        viewModel = new MainScreenViewModel(model);
+        binding.setViewModel(viewModel);
 
         binding.recyclerView.setLayoutManager(
                 new LinearLayoutManager(getActivity()));
         binding.recyclerView.addItemDecoration(new MyItemDecoration(20));
         binding.recyclerView.setAdapter(new OperationAdapter(
-                mRepository.getOperations(), getContext()));
+                repository.getOperations(), getContext()));
 
         return binding.getRoot();
     }
