@@ -1,7 +1,6 @@
 package ru.s4nchez.crackerfinance.screens.about;
 
 import android.content.pm.PackageManager;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import ru.s4nchez.crackerfinance.R;
-import ru.s4nchez.crackerfinance.databinding.FragmentAboutScreenBinding;
 
 public class FragmentAboutScreen extends Fragment {
 
