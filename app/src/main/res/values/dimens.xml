@@ -13,4 +13,5 @@
     <dimen name="main_screen_title_size">32dp</dimen>
     <dimen name="main_screen_title_bottom_margin">4dp</dimen>
     <dimen name="main_screen_balance_size">24dp</dimen>
+    <dimen name="main_screen_recycler_view_margin">20px</dimen>
 </resources>
