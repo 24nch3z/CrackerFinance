@@ -2,6 +2,7 @@ package ru.s4nchez.crackerfinance.model;
 
 import java.util.Date;
 
+import ru.s4nchez.crackerfinance.model.category.Category;
 import ru.s4nchez.crackerfinance.model.currency.Currency;
 
 public class Operation {
@@ -11,7 +12,9 @@ public class Operation {
     final private OperationType type;
     private String description;
     private String name;
-    private Date date;
+    private Date creatingDate;
+    private Date operationDate;
+    private Category category;
 
     public Operation(OperationType type, Currency currency, double sum) {
         this.sum = sum;
@@ -47,11 +50,27 @@ public class Operation {
         this.name = name;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCreatingDate() {
+        return creatingDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreatingDate(Date creatingDate) {
+        this.creatingDate = creatingDate;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Date getOperationDate() {
+        return operationDate;
+    }
+
+    public void setOperationDate(Date operationDate) {
+        this.operationDate = operationDate;
     }
 }

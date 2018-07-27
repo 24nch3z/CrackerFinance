@@ -2,17 +2,25 @@ package ru.s4nchez.crackerfinance.screens.main;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import ru.s4nchez.crackerfinance.R;
+import ru.s4nchez.crackerfinance.model.Repository;
+import ru.s4nchez.crackerfinance.screens.main.list.MyItemDecoration;
+import ru.s4nchez.crackerfinance.screens.main.list.OperationAdapter;
 
 public class FragmentMainScreen extends Fragment implements ViewContract {
 
+    private Repository repository;
     private MainScreenPresenter presenter;
     private TextView textViewBudget;
+    private RecyclerView recyclerView;
+    private OperationAdapter adapter;
 
     public static FragmentMainScreen newInstance() {
         FragmentMainScreen fragment = new FragmentMainScreen();
@@ -23,8 +31,10 @@ public class FragmentMainScreen extends Fragment implements ViewContract {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main_screen, container, false);
-        presenter = new MainScreenPresenter(new MainScreenModel(getContext().getApplicationContext()));
-        textViewBudget = v.findViewById(R.id.textViewBudget);
+        repository = Repository.get();
+        presenter = new MainScreenPresenter(new
+                MainScreenModel(getContext().getApplicationContext(), repository));
+        initViews(v);
         return v;
     }
 
@@ -39,6 +49,17 @@ public class FragmentMainScreen extends Fragment implements ViewContract {
     public void onPause() {
         super.onPause();
         presenter.detachView();
+    }
+
+    private void initViews(View v) {
+        textViewBudget = v.findViewById(R.id.textViewBudget);
+        recyclerView = v.findViewById(R.id.recyclerView);
+
+        adapter = new OperationAdapter(repository.getOperations(), getContext());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.addItemDecoration(new MyItemDecoration(
+                (int) getResources().getDimension(R.dimen.main_screen_recycler_view_margin)));
+        recyclerView.setAdapter(adapter);
     }
 
     @Override

@@ -14,8 +14,8 @@ public class MainScreenModel {
     private Repository repository;
     private Currency currency;
 
-    public MainScreenModel(Context context) {
-        repository = Repository.get();
+    public MainScreenModel(Context context, Repository repository) {
+        this.repository = repository;
         cracker = new Cracker();
         initCurrency(context);
     }

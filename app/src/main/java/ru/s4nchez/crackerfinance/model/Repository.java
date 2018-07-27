@@ -1,6 +1,7 @@
 package ru.s4nchez.crackerfinance.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import ru.s4nchez.crackerfinance.model.currency.Currencies;
@@ -41,9 +42,7 @@ public class Repository {
                 Currencies.get().ruble(), 500));
         operations.add(new Operation(OperationType.cost,
                 Currencies.get().ruble(), 540));
-    }
-
-    ;
+    };
 
     public static Repository get() {
         if (instance == null) {
@@ -58,5 +57,25 @@ public class Repository {
 
     public List<Operation> getOperations() {
         return operations;
+    }
+
+    public List<Operation> getCosts() {
+        List<Operation> list = new ArrayList<>();
+        for (Operation operation : operations) {
+            if (operation.getType() == OperationType.cost) {
+                list.add(operation);
+            }
+        }
+        return list;
+    }
+
+    public List<Operation> getIncomes() {
+        List<Operation> list = new ArrayList<>();
+        for (Operation operation : operations) {
+            if (operation.getType() == OperationType.income) {
+                list.add(operation);
+            }
+        }
+        return list;
     }
 }
