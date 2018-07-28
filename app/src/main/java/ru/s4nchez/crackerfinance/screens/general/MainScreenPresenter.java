@@ -1,4 +1,4 @@
-package ru.s4nchez.crackerfinance.screens.main;
+package ru.s4nchez.crackerfinance.screens.general;
 
 import ru.s4nchez.crackerfinance.BasePresenter;
 

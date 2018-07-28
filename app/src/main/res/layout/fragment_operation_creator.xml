@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/operation_creator_field_margin">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/sum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Сумма"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                tool:text="@string/about_screen_title_part1"/>
+
+            <TextView
+                android:id="@+id/sumError"
+                style="@style/errorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:text="Необходимо ввести сумму"
+                android:visibility="gone"
+                tool:visibility="visible"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            style="@style/spinnerLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Тип операции"/>
+
+        <Spinner
+            android:id="@+id/operationType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/operation_creator_field_margin"/>
+
+        <TextView
+            style="@style/spinnerLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Валюта"/>
+
+        <Spinner
+            android:id="@+id/currency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/operation_creator_field_margin"/>
+
+        <TextView
+            style="@style/spinnerLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Категория"/>
+
+        <Spinner
+            android:id="@+id/category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/operation_creator_field_margin"/>
+
+        <Button
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/operation_creator_field_margin"
+            android:visibility="gone"
+            tool:text="28.07.2018 / Дата операции"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/operation_creator_field_margin">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Комментарий"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Сохранить"/>
+    </LinearLayout>
+</ScrollView>

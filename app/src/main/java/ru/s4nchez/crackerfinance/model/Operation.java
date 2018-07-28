@@ -7,18 +7,31 @@ import ru.s4nchez.crackerfinance.model.currency.Currency;
 
 public class Operation {
 
-    final private double sum;
-    final private Currency currency;
-    final private OperationType type;
-    private String description;
-    private String name;
+    private double sum;
+    private Currency currency;
+    private OperationType type;
+    private String comment;
     private Date creatingDate;
     private Date operationDate;
     private Category category;
 
+    public Operation() {};
+
     public Operation(OperationType type, Currency currency, double sum) {
         this.sum = sum;
         this.currency = currency;
+        this.type = type;
+    }
+
+    public void setSum(double sum) {
+        this.sum = sum;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
+    public void setType(OperationType type) {
         this.type = type;
     }
 
@@ -34,20 +47,12 @@ public class Operation {
         return type;
     }
 
-    public String getDescription() {
-        return description;
+    public String getComment() {
+        return comment;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public Date getCreatingDate() {

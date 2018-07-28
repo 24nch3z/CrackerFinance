@@ -1,4 +1,4 @@
-package ru.s4nchez.crackerfinance.screens.main.list;
+package ru.s4nchez.crackerfinance.screens.list;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;

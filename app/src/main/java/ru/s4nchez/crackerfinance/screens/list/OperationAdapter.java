@@ -1,4 +1,4 @@
-package ru.s4nchez.crackerfinance.screens.main.list;
+package ru.s4nchez.crackerfinance.screens.list;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -33,7 +33,7 @@ public class OperationAdapter extends RecyclerView.Adapter<OperationHolder> {
     @Override
     public void onBindViewHolder(OperationHolder holder, int position) {
         Operation operation = items.get(position);
-        holder.bind(operation);
+        holder.bind(operation, position);
     }
 
     @Override

@@ -71,4 +71,13 @@ public class Currencies {
         }
         return null;
     }
+
+    public Currency getCurrencyByName(String name) {
+        for (Currency currency : Currencies.get().getCurrencies()) {
+            if (name.equalsIgnoreCase(currency.getName())) {
+                return currency;
+            }
+        }
+        return null;
+    }
 }

@@ -1,5 +1,6 @@
 package ru.s4nchez.crackerfinance;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import ru.s4nchez.crackerfinance.screens.about.FragmentAboutScreen;
 import ru.s4nchez.crackerfinance.screens.main.FragmentMainScreen;
+import ru.s4nchez.crackerfinance.screens.operation.OperationCreatorFragment;
 import ru.s4nchez.crackerfinance.screens.settings.FragmentSettingsScreen;
 import ru.s4nchez.crackerfinance.utils.MyToast;
 import ru.terrakok.cicerone.Navigator;
@@ -44,6 +46,20 @@ public class MainActivity extends AppCompatActivity
         if (savedInstanceState == null) {
             MyApplication.instance.getRouter().replaceScreen(Screens.SCREEN_MAIN);
         }
+
+//        FragmentManager fm = getSupportFragmentManager();
+//        Fragment fragment = fm.findFragmentById(R.id.container);
+//        if (fragment == null) {
+//            setFragment(FragmentMainScreen.newInstance());
+//        }
+    }
+
+    private void setFragment(Fragment fragment) {
+        FragmentManager fm = getSupportFragmentManager();
+
+        fm.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
     }
 
     @Override
@@ -72,7 +88,6 @@ public class MainActivity extends AppCompatActivity
             R.id.container) {
         @Override
         protected Fragment createFragment(String screenKey, Object data) {
-            getSupportActionBar().setTitle(screenKey);
             switch(screenKey) {
                 case Screens.SCREEN_MAIN:
                     setToolbarText(getString(R.string.section_main));
@@ -83,6 +98,8 @@ public class MainActivity extends AppCompatActivity
                 case Screens.SCREEN_SETTINGS:
                     setToolbarText(getString(R.string.section_settings));
                     return FragmentSettingsScreen.newInstance();
+                case Screens.SCREEN_OPERATION_CREATOR:
+                    return OperationCreatorFragment.newInstance();
                 default:
                     return FragmentMainScreen.newInstance();
             }
@@ -111,6 +128,17 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_about) {
             MyApplication.instance.getRouter().replaceScreen(Screens.SCREEN_ABOUT);
         }
+
+//        if (id == R.id.nav_main) {
+//            setFragment(FragmentMainScreen.newInstance());
+//            setToolbarText("Главная");
+//        } else if (id == R.id.nav_settings) {
+//            setFragment(FragmentSettingsScreen.newInstance());
+//            setToolbarText("Настройки");
+//        } else if (id == R.id.nav_about) {
+//            setFragment(FragmentAboutScreen.newInstance());
+//            setToolbarText("О приложении");
+//        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
