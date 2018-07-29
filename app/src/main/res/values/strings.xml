@@ -9,6 +9,7 @@
     <string name="section_settings">Настройки</string>
 
     <string name="main_screen_title">Ваш баланс</string>
+    <string name="main_screen_change_account">Сменить счет</string>
 
     <string name="about_screen_version">Версия приложения:</string>
     <string name="about_screen_title_part1">К</string>

@@ -24,19 +24,18 @@ import butterknife.OnItemSelected;
 import butterknife.OnTextChanged;
 import ru.s4nchez.crackerfinance.BaseFragment;
 import ru.s4nchez.crackerfinance.MyApplication;
-import ru.s4nchez.crackerfinance.OnBackPressedListener;
 import ru.s4nchez.crackerfinance.R;
-import ru.s4nchez.crackerfinance.RepositoryViewModel;
+import ru.s4nchez.crackerfinance.AppViewModel;
 import ru.s4nchez.crackerfinance.Screens;
-import ru.s4nchez.crackerfinance.model.Repository;
-import ru.s4nchez.crackerfinance.utils.MyLog;
+import ru.s4nchez.crackerfinance.model.Account;
 import ru.s4nchez.crackerfinance.utils.MyToast;
 
 public class OperationCreatorFragment extends BaseFragment implements ViewContract {
 
     private OperationCreatorModel model;
     private OperationCreatorPresenter presenter;
-    private Repository repository;
+//    private Repository repository;
+    private Account account;
 
     @BindView(R.id.comment)
     TextInputEditText comment;
@@ -74,13 +73,13 @@ public class OperationCreatorFragment extends BaseFragment implements ViewContra
 
         butterKnifeUnbinder = ButterKnife.bind(this, v);
 
-        RepositoryViewModel viewModel = ViewModelProviders
-                .of(getActivity()).get(RepositoryViewModel.class);
-        MutableLiveData<Repository> liveData = viewModel.getRepository();
-        repository = liveData.getValue();
+        AppViewModel viewModel = ViewModelProviders
+                .of(getActivity()).get(AppViewModel.class);
+        MutableLiveData<Account> liveData = viewModel.getCurrentAccount();
+        account = liveData.getValue();
 
         model = new OperationCreatorModel();
-        presenter = new OperationCreatorPresenter(model, repository);
+        presenter = new OperationCreatorPresenter(model, account);
         presenter.attachView(this);
 
         presenter.initOperationType();

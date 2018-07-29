@@ -3,16 +3,14 @@ package ru.s4nchez.crackerfinance.screens.list;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import ru.s4nchez.crackerfinance.MyApplication;
-import ru.s4nchez.crackerfinance.RepositoryViewModel;
+import ru.s4nchez.crackerfinance.AppViewModel;
 import ru.s4nchez.crackerfinance.databinding.ItemOperationBinding;
 import ru.s4nchez.crackerfinance.model.Operation;
-import ru.s4nchez.crackerfinance.model.Repository;
 import ru.s4nchez.crackerfinance.utils.MyToast;
 
 public class OperationHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
 
-    private RepositoryViewModel viewModel;
+    private AppViewModel viewModel;
     private ItemOperationBinding binding;
     private int position = -1;
 
@@ -23,7 +21,7 @@ public class OperationHolder extends RecyclerView.ViewHolder implements View.OnL
         binding.getRoot().setOnLongClickListener(this);
     }
 
-    public void bind(Operation operation, int position, RepositoryViewModel viewModel) {
+    public void bind(Operation operation, int position, AppViewModel viewModel) {
         this.position = position;
         this.viewModel = viewModel;
         binding.getViewModel().setOperation(operation);

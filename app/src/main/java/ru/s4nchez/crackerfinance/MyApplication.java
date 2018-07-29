@@ -2,7 +2,6 @@ package ru.s4nchez.crackerfinance;
 
 import android.app.Application;
 
-import ru.s4nchez.crackerfinance.model.Repository;
 import ru.terrakok.cicerone.Cicerone;
 import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;

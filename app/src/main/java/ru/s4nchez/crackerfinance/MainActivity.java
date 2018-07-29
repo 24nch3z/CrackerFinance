@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import butterknife.BindView;
 import ru.s4nchez.crackerfinance.screens.about.FragmentAboutScreen;
 import ru.s4nchez.crackerfinance.screens.main.FragmentMainScreen;
 import ru.s4nchez.crackerfinance.screens.operation.OperationCreatorFragment;
@@ -129,11 +130,11 @@ public class MainActivity extends AppCompatActivity
 
         // TODO: заменить replaceScreen
         if (id == R.id.nav_main) {
-            MyApplication.instance.getRouter().replaceScreen(Screens.SCREEN_MAIN);
+            MyApplication.instance.getRouter().newRootScreen(Screens.SCREEN_MAIN);
         } else if (id == R.id.nav_settings) {
-            MyApplication.instance.getRouter().replaceScreen(Screens.SCREEN_SETTINGS);
+            MyApplication.instance.getRouter().newRootScreen(Screens.SCREEN_SETTINGS);
         } else if (id == R.id.nav_about) {
-            MyApplication.instance.getRouter().replaceScreen(Screens.SCREEN_ABOUT);
+            MyApplication.instance.getRouter().newRootScreen(Screens.SCREEN_ABOUT);
         }
 
 //        if (id == R.id.nav_main) {

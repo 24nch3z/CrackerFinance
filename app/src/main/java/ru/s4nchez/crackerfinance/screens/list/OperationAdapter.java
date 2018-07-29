@@ -9,21 +9,24 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import ru.s4nchez.crackerfinance.R;
-import ru.s4nchez.crackerfinance.RepositoryViewModel;
+import ru.s4nchez.crackerfinance.AppViewModel;
 import ru.s4nchez.crackerfinance.databinding.ItemOperationBinding;
 import ru.s4nchez.crackerfinance.model.Operation;
-import ru.s4nchez.crackerfinance.model.Repository;
 
 public class OperationAdapter extends RecyclerView.Adapter<OperationHolder> {
 
     private List<Operation> items;
     private Context context;
-    private RepositoryViewModel viewModel;
+    private AppViewModel viewModel;
 
-    public OperationAdapter(List<Operation> items, Context context, RepositoryViewModel viewModel) {
+    public OperationAdapter(List<Operation> items, Context context, AppViewModel viewModel) {
         this.items = items;
         this.context = context;
         this.viewModel = viewModel;
+    }
+
+    public void setItems(List<Operation> items) {
+        this.items = items;
     }
 
     @Override

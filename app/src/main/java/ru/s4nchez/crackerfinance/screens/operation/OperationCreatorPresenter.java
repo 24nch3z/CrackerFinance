@@ -1,29 +1,27 @@
 package ru.s4nchez.crackerfinance.screens.operation;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import ru.s4nchez.crackerfinance.BasePresenter;
 import ru.s4nchez.crackerfinance.R;
+import ru.s4nchez.crackerfinance.model.Account;
 import ru.s4nchez.crackerfinance.model.OperationType;
-import ru.s4nchez.crackerfinance.model.Repository;
 import ru.s4nchez.crackerfinance.model.category.Categories;
 import ru.s4nchez.crackerfinance.model.category.Category;
 import ru.s4nchez.crackerfinance.model.currency.Currencies;
 import ru.s4nchez.crackerfinance.model.currency.Currency;
-import ru.s4nchez.crackerfinance.utils.MyLog;
 
 public class OperationCreatorPresenter extends BasePresenter<ViewContract> {
 
     private OperationCreatorModel model;
-    private Repository repository;
+//    private Repository repository;
+    private Account account;
 
-    public OperationCreatorPresenter(OperationCreatorModel model, Repository repository) {
+    public OperationCreatorPresenter(OperationCreatorModel model, Account account) {
         this.model = model;
-        this.repository = repository;
+        this.account = account;
     }
 
     public void setSum(CharSequence sumStr) {
@@ -86,7 +84,7 @@ public class OperationCreatorPresenter extends BasePresenter<ViewContract> {
 
     public void save() {
         if (!checkForSave()) {
-            repository.addOperation(model.getOperation());
+            account.addOperation(model.getOperation());
             view.exitFromScreen();
         }
     }

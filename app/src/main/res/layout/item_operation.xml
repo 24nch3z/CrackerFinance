@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/item_operation_sum_margin"
                 android:text='@{viewModel.operation.sum + viewModel.operation.currency.symbol}'
-                android:textColor="@{viewModel.operation.type == OperationType.income ? @color/colorAccent : @color/colorPrimaryDark}"
+                android:textColor="@color/colorAccent"
                 app:layout_constraintStart_toEndOf="@+id/imageViewIcon"
                 app:layout_constraintTop_toTopOf="parent"
                 tool:text="100$"/>
