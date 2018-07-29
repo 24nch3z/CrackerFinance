@@ -17,6 +17,7 @@ import ru.s4nchez.crackerfinance.screens.about.FragmentAboutScreen;
 import ru.s4nchez.crackerfinance.screens.main.FragmentMainScreen;
 import ru.s4nchez.crackerfinance.screens.operation.OperationCreatorFragment;
 import ru.s4nchez.crackerfinance.screens.settings.FragmentSettingsScreen;
+import ru.s4nchez.crackerfinance.utils.MyLog;
 import ru.s4nchez.crackerfinance.utils.MyToast;
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.android.SupportFragmentNavigator;
@@ -68,7 +69,12 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container);
+            if (fragment != null && fragment instanceof OnBackPressedListener) {
+                ((OnBackPressedListener) fragment).onBackPressed();
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
@@ -121,6 +127,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        // TODO: заменить replaceScreen
         if (id == R.id.nav_main) {
             MyApplication.instance.getRouter().replaceScreen(Screens.SCREEN_MAIN);
         } else if (id == R.id.nav_settings) {

@@ -1,6 +1,8 @@
 package ru.s4nchez.crackerfinance.screens.operation;
 
 
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -22,10 +24,13 @@ import butterknife.OnItemSelected;
 import butterknife.OnTextChanged;
 import ru.s4nchez.crackerfinance.BaseFragment;
 import ru.s4nchez.crackerfinance.MyApplication;
+import ru.s4nchez.crackerfinance.OnBackPressedListener;
 import ru.s4nchez.crackerfinance.R;
+import ru.s4nchez.crackerfinance.RepositoryViewModel;
 import ru.s4nchez.crackerfinance.Screens;
 import ru.s4nchez.crackerfinance.model.Repository;
 import ru.s4nchez.crackerfinance.utils.MyLog;
+import ru.s4nchez.crackerfinance.utils.MyToast;
 
 public class OperationCreatorFragment extends BaseFragment implements ViewContract {
 
@@ -54,6 +59,9 @@ public class OperationCreatorFragment extends BaseFragment implements ViewContra
     @BindView(R.id.sumError)
     TextView sumError;
 
+    @BindView(R.id.categoryLabel)
+    TextView categoryLabel;
+
 
     public static OperationCreatorFragment newInstance() {
         return new OperationCreatorFragment();
@@ -65,7 +73,12 @@ public class OperationCreatorFragment extends BaseFragment implements ViewContra
         View v = inflater.inflate(R.layout.fragment_operation_creator, container, false);
 
         butterKnifeUnbinder = ButterKnife.bind(this, v);
-        repository = MyApplication.instance.getRepository();
+
+        RepositoryViewModel viewModel = ViewModelProviders
+                .of(getActivity()).get(RepositoryViewModel.class);
+        MutableLiveData<Repository> liveData = viewModel.getRepository();
+        repository = liveData.getValue();
+
         model = new OperationCreatorModel();
         presenter = new OperationCreatorPresenter(model, repository);
         presenter.attachView(this);
@@ -102,12 +115,20 @@ public class OperationCreatorFragment extends BaseFragment implements ViewContra
 
     @Override
     public void exitFromScreen() {
+        MyToast.get(getContext()).show("Операция успешно создана");
         MyApplication.instance.getRouter().backTo(Screens.SCREEN_MAIN);
     }
 
     @Override
-    public void showSumError() {
+    public void showSumError(int textErrorId) {
+        sumError.setText(getText(textErrorId));
         sumError.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showHideCategory(boolean flag) {
+        category.setVisibility(flag ? View.VISIBLE : View.GONE);
+        categoryLabel.setVisibility(flag ? View.VISIBLE : View.GONE);
     }
 
     @Override

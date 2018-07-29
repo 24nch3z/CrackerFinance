@@ -1,10 +1,13 @@
 package ru.s4nchez.crackerfinance.screens.operation;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import ru.s4nchez.crackerfinance.BasePresenter;
+import ru.s4nchez.crackerfinance.R;
 import ru.s4nchez.crackerfinance.model.OperationType;
 import ru.s4nchez.crackerfinance.model.Repository;
 import ru.s4nchez.crackerfinance.model.category.Categories;
@@ -36,9 +39,13 @@ public class OperationCreatorPresenter extends BasePresenter<ViewContract> {
     }
 
     public void setOperationType(int position) {
-        OperationType type = OperationType.income;
+        OperationType type = OperationType.cost;
         if (position > 0) {
-            type = OperationType.cost;
+            type = OperationType.income;
+            view.showHideCategory(false);
+            model.getOperation().setCategory(null);
+        } else {
+            view.showHideCategory(true);
         }
         model.getOperation().setType(type);
     }
@@ -50,7 +57,7 @@ public class OperationCreatorPresenter extends BasePresenter<ViewContract> {
     }
 
     public void initOperationType() {
-        List<String> list = new ArrayList<>(Arrays.asList(new String[] { "Доход", "Расход" }));
+        List<String> list = new ArrayList<>(Arrays.asList(new String[] { "Расход", "Доход" }));
         int selection = 0;
         view.initOperationType(list, selection);
     }
@@ -89,7 +96,7 @@ public class OperationCreatorPresenter extends BasePresenter<ViewContract> {
 
         // TODO: Проверить, что сумма была не слишком большой и чтобы больше нуля
         if (model.getOperation().getSum() <= 0) {
-            view.showSumError();
+            view.showSumError(R.string.operation_creator_error_sum_empty);
             isError = true;
         }
 

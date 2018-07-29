@@ -12,14 +12,12 @@ public class MyApplication extends Application {
     public static MyApplication instance;
 
     private Cicerone<Router> cicerone;
-    private Repository repository;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
         cicerone = Cicerone.create();
-        repository = new Repository();
     }
 
     public NavigatorHolder getNavigatorHolder() {
@@ -28,9 +26,5 @@ public class MyApplication extends Application {
 
     public Router getRouter() {
         return cicerone.getRouter();
-    }
-
-    public Repository getRepository() {
-        return repository;
     }
 }

@@ -10,5 +10,6 @@ public interface ViewContract {
     void initCategory(List<String> list, int selection);
     void setDate(String s);
     void exitFromScreen();
-    void showSumError();
+    void showSumError(int textErrorId);
+    void showHideCategory(boolean flag);
 }

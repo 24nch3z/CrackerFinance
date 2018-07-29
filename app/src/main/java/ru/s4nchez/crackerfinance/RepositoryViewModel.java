@@ -24,7 +24,21 @@ public class RepositoryViewModel extends ViewModel {
         data.setValue(repository);
     }
 
+    public void removeOperation(int position) {
+        Repository repository = data.getValue();
+        repository.getOperations().remove(position);
+        data.setValue(repository);
+    }
+
     public List<Operation> getOperations() {
         return data.getValue().getOperations();
     }
+
+    public MutableLiveData<Repository> getRepository() {
+        return data;
+    }
+
+//    public Repository getRepository() {
+//        return data.getValue();
+//    }
 }
