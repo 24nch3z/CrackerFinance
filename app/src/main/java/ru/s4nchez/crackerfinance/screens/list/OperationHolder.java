@@ -3,7 +3,7 @@ package ru.s4nchez.crackerfinance.screens.list;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import ru.s4nchez.crackerfinance.AppViewModel;
+import ru.s4nchez.crackerfinance.vm.AppViewModel;
 import ru.s4nchez.crackerfinance.databinding.ItemOperationBinding;
 import ru.s4nchez.crackerfinance.model.Operation;
 import ru.s4nchez.crackerfinance.utils.MyToast;

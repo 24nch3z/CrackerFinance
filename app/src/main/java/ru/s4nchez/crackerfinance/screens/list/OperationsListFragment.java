@@ -3,7 +3,6 @@ package ru.s4nchez.crackerfinance.screens.list;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.s4nchez.crackerfinance.MyApplication;
 import ru.s4nchez.crackerfinance.R;
-import ru.s4nchez.crackerfinance.AppViewModel;
+import ru.s4nchez.crackerfinance.vm.AppViewModel;
 import ru.s4nchez.crackerfinance.Screens;
 import ru.s4nchez.crackerfinance.model.Account;
 
@@ -31,8 +30,7 @@ public class OperationsListFragment extends Fragment {
 
 
     public static OperationsListFragment newInstance() {
-        OperationsListFragment fragment = new OperationsListFragment();
-        return fragment;
+        return new OperationsListFragment();
     }
 
     @Override
@@ -45,16 +43,18 @@ public class OperationsListFragment extends Fragment {
                 .of(getActivity()).get(AppViewModel.class);
         MutableLiveData<Account> liveData = viewModel.getCurrentAccount();
         account = liveData.getValue();
-        liveData.observe(getActivity(), account -> {
-            this.account = account;
-            if (adapter != null) {
-                adapter.setItems(account.getOperations());
-                adapter.notifyDataSetChanged();
-            }
-        });
+        liveData.observe(getActivity(), this::updateUI);
 
         initViews(v);
         return v;
+    }
+
+    private void updateUI(Account account) {
+        this.account = account;
+        if (adapter != null) {
+            adapter.setItems(account.getOperations());
+            adapter.notifyDataSetChanged();
+        }
     }
 
     private void initViews(View v) {

@@ -2,6 +2,7 @@ package ru.s4nchez.crackerfinance.screens.general;
 
 import ru.s4nchez.crackerfinance.BasePresenter;
 import ru.s4nchez.crackerfinance.model.Account;
+import ru.s4nchez.crackerfinance.utils.MyLog;
 
 public class MainScreenPresenter extends BasePresenter<ViewContract> {
 

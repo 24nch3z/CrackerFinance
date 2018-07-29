@@ -1,6 +1,5 @@
 package ru.s4nchez.crackerfinance;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,14 +10,19 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import butterknife.BindView;
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import ru.s4nchez.crackerfinance.screens.about.FragmentAboutScreen;
 import ru.s4nchez.crackerfinance.screens.main.FragmentMainScreen;
 import ru.s4nchez.crackerfinance.screens.operation.OperationCreatorFragment;
 import ru.s4nchez.crackerfinance.screens.settings.FragmentSettingsScreen;
-import ru.s4nchez.crackerfinance.utils.MyLog;
 import ru.s4nchez.crackerfinance.utils.MyToast;
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.android.SupportFragmentNavigator;
@@ -48,12 +52,6 @@ public class MainActivity extends AppCompatActivity
         if (savedInstanceState == null) {
             MyApplication.instance.getRouter().replaceScreen(Screens.SCREEN_MAIN);
         }
-
-//        FragmentManager fm = getSupportFragmentManager();
-//        Fragment fragment = fm.findFragmentById(R.id.container);
-//        if (fragment == null) {
-//            setFragment(FragmentMainScreen.newInstance());
-//        }
     }
 
     private void setFragment(Fragment fragment) {
@@ -95,7 +93,7 @@ public class MainActivity extends AppCompatActivity
             R.id.container) {
         @Override
         protected Fragment createFragment(String screenKey, Object data) {
-            switch(screenKey) {
+            switch (screenKey) {
                 case Screens.SCREEN_MAIN:
                     setToolbarText(getString(R.string.section_main));
                     return FragmentMainScreen.newInstance();
@@ -128,7 +126,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        // TODO: заменить replaceScreen
         if (id == R.id.nav_main) {
             MyApplication.instance.getRouter().newRootScreen(Screens.SCREEN_MAIN);
         } else if (id == R.id.nav_settings) {
@@ -136,17 +133,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_about) {
             MyApplication.instance.getRouter().newRootScreen(Screens.SCREEN_ABOUT);
         }
-
-//        if (id == R.id.nav_main) {
-//            setFragment(FragmentMainScreen.newInstance());
-//            setToolbarText("Главная");
-//        } else if (id == R.id.nav_settings) {
-//            setFragment(FragmentSettingsScreen.newInstance());
-//            setToolbarText("Настройки");
-//        } else if (id == R.id.nav_about) {
-//            setFragment(FragmentAboutScreen.newInstance());
-//            setToolbarText("О приложении");
-//        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

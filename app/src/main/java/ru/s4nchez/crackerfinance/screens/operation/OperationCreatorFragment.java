@@ -25,16 +25,15 @@ import butterknife.OnTextChanged;
 import ru.s4nchez.crackerfinance.BaseFragment;
 import ru.s4nchez.crackerfinance.MyApplication;
 import ru.s4nchez.crackerfinance.R;
-import ru.s4nchez.crackerfinance.AppViewModel;
 import ru.s4nchez.crackerfinance.Screens;
 import ru.s4nchez.crackerfinance.model.Account;
 import ru.s4nchez.crackerfinance.utils.MyToast;
+import ru.s4nchez.crackerfinance.vm.AppViewModel;
 
 public class OperationCreatorFragment extends BaseFragment implements ViewContract {
 
     private OperationCreatorModel model;
     private OperationCreatorPresenter presenter;
-//    private Repository repository;
     private Account account;
 
     @BindView(R.id.comment)
@@ -93,8 +92,8 @@ public class OperationCreatorFragment extends BaseFragment implements ViewContra
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onDestroyView() {
+        super.onDestroyView();
         presenter.detachView();
     }
 
@@ -173,7 +172,7 @@ public class OperationCreatorFragment extends BaseFragment implements ViewContra
         presenter.setCurrency((int) l);
     }
 
-    @OnClick({ R.id.save, R.id.date })
+    @OnClick({R.id.save, R.id.date})
     void onClick(View v) {
         int id = v.getId();
         switch (id) {

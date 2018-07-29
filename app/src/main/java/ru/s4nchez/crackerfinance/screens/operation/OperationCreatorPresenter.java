@@ -84,6 +84,7 @@ public class OperationCreatorPresenter extends BasePresenter<ViewContract> {
 
     public void save() {
         if (!checkForSave()) {
+            // TODO: Нужно добавлять через ViewModel
             account.addOperation(model.getOperation());
             view.exitFromScreen();
         }

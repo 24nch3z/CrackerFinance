@@ -1,4 +1,4 @@
-package ru.s4nchez.crackerfinance;
+package ru.s4nchez.crackerfinance.vm;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
@@ -8,15 +8,18 @@ import java.util.List;
 import ru.s4nchez.crackerfinance.model.Account;
 import ru.s4nchez.crackerfinance.model.Bank;
 import ru.s4nchez.crackerfinance.model.Operation;
+import ru.s4nchez.crackerfinance.model.Rates;
 
 public class AppViewModel extends ViewModel {
 
     private Bank bank;
     private MutableLiveData<Account> currentAccount = new MutableLiveData<>();
+    private MutableLiveData<Boolean> ratesIsLoaded = new MutableLiveData<>();
 
     public AppViewModel() {
         bank = new Bank();
         currentAccount.setValue(bank.getAccounts().get(1));
+        ratesIsLoaded.setValue(false);
     }
 
     public void setCurrentAccount(int i) {
@@ -42,6 +45,14 @@ public class AppViewModel extends ViewModel {
 
     public MutableLiveData<Account> getCurrentAccount() {
         return currentAccount;
+    }
+
+    public MutableLiveData<Boolean> getRatesIsLoaded() {
+        return ratesIsLoaded;
+    }
+
+    public void setRatesIsLoaded(boolean ratesIsLoaded) {
+        this.ratesIsLoaded.setValue(ratesIsLoaded);
     }
 
     public Bank getBank() {

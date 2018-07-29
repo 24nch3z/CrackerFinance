@@ -2,7 +2,6 @@ package ru.s4nchez.crackerfinance.screens.general;
 
 import android.app.Dialog;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
@@ -10,8 +9,7 @@ import android.widget.ArrayAdapter;
 
 import java.util.List;
 
-import ru.s4nchez.crackerfinance.AppViewModel;
-import ru.s4nchez.crackerfinance.utils.MyToast;
+import ru.s4nchez.crackerfinance.vm.AppViewModel;
 
 public class ChangeAccountDialogFragment extends DialogFragment {
 
