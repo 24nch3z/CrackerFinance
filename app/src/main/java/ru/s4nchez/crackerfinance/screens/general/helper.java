@@ -33,7 +33,7 @@ public class helper {
     }
 
     public static String getRatesStringForView(String response, Currency currentCurrency,
-                                         List<Currency> other) throws IOException, JSONException {
+                                               List<Currency> other) throws IOException, JSONException {
         JSONObject main = new JSONObject(response);
         StringBuilder result = new StringBuilder();
 

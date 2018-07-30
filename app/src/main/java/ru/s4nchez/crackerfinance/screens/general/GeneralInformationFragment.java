@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.CardView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +13,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -25,29 +22,23 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import ru.s4nchez.crackerfinance.utils.MyLog;
-import ru.s4nchez.crackerfinance.vm.AppViewModel;
 import ru.s4nchez.crackerfinance.BaseFragment;
 import ru.s4nchez.crackerfinance.R;
+import ru.s4nchez.crackerfinance.Settings;
 import ru.s4nchez.crackerfinance.model.Account;
 import ru.s4nchez.crackerfinance.model.currency.Currencies;
 import ru.s4nchez.crackerfinance.model.currency.Currency;
+import ru.s4nchez.crackerfinance.vm.AppViewModel;
 
 public class GeneralInformationFragment extends BaseFragment implements ViewContract {
 
     private static final String DIALOG_ID = "CHANGE_ACCOUNT_DIALOG";
 
-    private final OkHttpClient client = new OkHttpClient();
-
-    private MainScreenPresenter presenter;
-    private Account account;
-    private boolean ratesIsLoaded;
-    private AppViewModel viewModel;
     private static String ratesText = "";
+    private final OkHttpClient client = new OkHttpClient();
 
     @BindView(R.id.account)
     TextView viewAccount;
@@ -63,6 +54,11 @@ public class GeneralInformationFragment extends BaseFragment implements ViewCont
 
     @BindView(R.id.progressBarRates)
     ProgressBar progressBarRates;
+
+    private MainScreenPresenter presenter;
+    private Account account;
+    private boolean ratesIsLoaded;
+    private AppViewModel viewModel;
 
     public static GeneralInformationFragment newInstance() {
         return new GeneralInformationFragment();
@@ -99,7 +95,8 @@ public class GeneralInformationFragment extends BaseFragment implements ViewCont
     }
 
     private void loadCurrency() {
-        final Currency currentCurrency = Currencies.get().ruble();
+        String currentCurrencyStr = Settings.get().getCurrency(getActivity());
+        final Currency currentCurrency = Currencies.get().getCurrencyByCode(currentCurrencyStr);
         final List<Currency> other = Currencies.get().getCurrenciesExceptOne(currentCurrency);
         String q = helper.getCurrencyParamForRequest(currentCurrency, other);
 

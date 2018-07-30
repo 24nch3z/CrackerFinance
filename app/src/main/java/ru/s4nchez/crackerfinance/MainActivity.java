@@ -11,14 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import java.io.IOException;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import ru.s4nchez.crackerfinance.screens.about.FragmentAboutScreen;
 import ru.s4nchez.crackerfinance.screens.main.FragmentMainScreen;
 import ru.s4nchez.crackerfinance.screens.operation.OperationCreatorFragment;
@@ -31,6 +23,37 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
+    private Navigator navigator = new SupportFragmentNavigator(getSupportFragmentManager(),
+            R.id.container) {
+        @Override
+        protected Fragment createFragment(String screenKey, Object data) {
+            switch (screenKey) {
+                case Screens.SCREEN_MAIN:
+                    setToolbarText(getString(R.string.section_main));
+                    return FragmentMainScreen.newInstance();
+                case Screens.SCREEN_ABOUT:
+                    setToolbarText(getString(R.string.section_about));
+                    return FragmentAboutScreen.newInstance();
+                case Screens.SCREEN_SETTINGS:
+                    setToolbarText(getString(R.string.section_settings));
+                    return FragmentSettingsScreen.newInstance();
+                case Screens.SCREEN_OPERATION_CREATOR:
+                    return OperationCreatorFragment.newInstance();
+                default:
+                    return FragmentMainScreen.newInstance();
+            }
+        }
+
+        @Override
+        protected void showSystemMessage(String message) {
+            MyToast.get(MainActivity.this).show(message);
+        }
+
+        @Override
+        protected void exit() {
+            finish();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,38 +111,6 @@ public class MainActivity extends AppCompatActivity
         super.onPause();
         MyApplication.instance.getNavigatorHolder().removeNavigator();
     }
-
-    private Navigator navigator = new SupportFragmentNavigator(getSupportFragmentManager(),
-            R.id.container) {
-        @Override
-        protected Fragment createFragment(String screenKey, Object data) {
-            switch (screenKey) {
-                case Screens.SCREEN_MAIN:
-                    setToolbarText(getString(R.string.section_main));
-                    return FragmentMainScreen.newInstance();
-                case Screens.SCREEN_ABOUT:
-                    setToolbarText(getString(R.string.section_about));
-                    return FragmentAboutScreen.newInstance();
-                case Screens.SCREEN_SETTINGS:
-                    setToolbarText(getString(R.string.section_settings));
-                    return FragmentSettingsScreen.newInstance();
-                case Screens.SCREEN_OPERATION_CREATOR:
-                    return OperationCreatorFragment.newInstance();
-                default:
-                    return FragmentMainScreen.newInstance();
-            }
-        }
-
-        @Override
-        protected void showSystemMessage(String message) {
-            MyToast.get(MainActivity.this).show(message);
-        }
-
-        @Override
-        protected void exit() {
-            finish();
-        }
-    };
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

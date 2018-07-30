@@ -8,7 +8,6 @@ import java.util.List;
 import ru.s4nchez.crackerfinance.model.Account;
 import ru.s4nchez.crackerfinance.model.Bank;
 import ru.s4nchez.crackerfinance.model.Operation;
-import ru.s4nchez.crackerfinance.model.Rates;
 
 public class AppViewModel extends ViewModel {
 
@@ -20,11 +19,6 @@ public class AppViewModel extends ViewModel {
         bank = new Bank();
         currentAccount.setValue(bank.getAccounts().get(1));
         ratesIsLoaded.setValue(false);
-    }
-
-    public void setCurrentAccount(int i) {
-        Account account = bank.getAccountByIndex(i);
-        currentAccount.setValue(account);
     }
 
     public void addOperation(Operation operation) {
@@ -45,6 +39,11 @@ public class AppViewModel extends ViewModel {
 
     public MutableLiveData<Account> getCurrentAccount() {
         return currentAccount;
+    }
+
+    public void setCurrentAccount(int i) {
+        Account account = bank.getAccountByIndex(i);
+        currentAccount.setValue(account);
     }
 
     public MutableLiveData<Boolean> getRatesIsLoaded() {

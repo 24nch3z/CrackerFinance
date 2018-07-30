@@ -8,7 +8,8 @@ public abstract class BaseFragment extends Fragment {
 
     protected Unbinder butterKnifeUnbinder;
 
-    @Override public void onDestroyView() {
+    @Override
+    public void onDestroyView() {
         super.onDestroyView();
         butterKnifeUnbinder.unbind();
     }

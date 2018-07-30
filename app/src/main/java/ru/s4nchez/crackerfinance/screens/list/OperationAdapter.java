@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import ru.s4nchez.crackerfinance.R;
-import ru.s4nchez.crackerfinance.vm.AppViewModel;
 import ru.s4nchez.crackerfinance.databinding.ItemOperationBinding;
 import ru.s4nchez.crackerfinance.model.Operation;
+import ru.s4nchez.crackerfinance.vm.AppViewModel;
 
 public class OperationAdapter extends RecyclerView.Adapter<OperationHolder> {
 

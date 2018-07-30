@@ -15,19 +15,17 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.s4nchez.crackerfinance.MyApplication;
 import ru.s4nchez.crackerfinance.R;
-import ru.s4nchez.crackerfinance.vm.AppViewModel;
 import ru.s4nchez.crackerfinance.Screens;
 import ru.s4nchez.crackerfinance.model.Account;
+import ru.s4nchez.crackerfinance.vm.AppViewModel;
 
 public class OperationsListFragment extends Fragment {
 
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
     private Account account;
     private OperationAdapter adapter;
     private AppViewModel viewModel;
-
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
-
 
     public static OperationsListFragment newInstance() {
         return new OperationsListFragment();

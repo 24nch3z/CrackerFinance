@@ -1,6 +1,5 @@
 package ru.s4nchez.crackerfinance.screens.operation;
 
-
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -32,10 +30,6 @@ import ru.s4nchez.crackerfinance.vm.AppViewModel;
 
 public class OperationCreatorFragment extends BaseFragment implements ViewContract {
 
-    private OperationCreatorModel model;
-    private OperationCreatorPresenter presenter;
-    private Account account;
-
     @BindView(R.id.comment)
     TextInputEditText comment;
 
@@ -51,15 +45,15 @@ public class OperationCreatorFragment extends BaseFragment implements ViewContra
     @BindView(R.id.category)
     Spinner category;
 
-    @BindView(R.id.date)
-    Button date;
-
     @BindView(R.id.sumError)
     TextView sumError;
 
     @BindView(R.id.categoryLabel)
     TextView categoryLabel;
 
+    private OperationCreatorModel model;
+    private OperationCreatorPresenter presenter;
+    private Account account;
 
     public static OperationCreatorFragment newInstance() {
         return new OperationCreatorFragment();
@@ -84,7 +78,6 @@ public class OperationCreatorFragment extends BaseFragment implements ViewContra
         presenter.initOperationType();
         presenter.initCurrency();
         presenter.initCategory();
-        presenter.initDate();
 
         initToolbar();
 
@@ -98,7 +91,8 @@ public class OperationCreatorFragment extends BaseFragment implements ViewContra
     }
 
     private void initToolbar() {
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Создание операции");
+        ((AppCompatActivity) getActivity()).getSupportActionBar()
+                .setTitle(getString(R.string.operation_creator_toolbar_title));
     }
 
     @Override
@@ -107,13 +101,8 @@ public class OperationCreatorFragment extends BaseFragment implements ViewContra
     }
 
     @Override
-    public void setDate(String s) {
-        date.setText(s);
-    }
-
-    @Override
     public void exitFromScreen() {
-        MyToast.get(getContext()).show("Операция успешно создана");
+        MyToast.get(getContext()).show(getString(R.string.operation_creator_save_success));
         MyApplication.instance.getRouter().backTo(Screens.SCREEN_MAIN);
     }
 
@@ -159,30 +148,22 @@ public class OperationCreatorFragment extends BaseFragment implements ViewContra
 
     @OnItemSelected(R.id.operationType)
     void onItemSelectedOperationType(AdapterView<?> adapterView, View view, int i, long l) {
-        presenter.setOperationType((int) l);
+        presenter.setOperationType(i);
     }
 
     @OnItemSelected(R.id.category)
     void onItemSelectedOperationCategory(AdapterView<?> adapterView, View view, int i, long l) {
-        presenter.setCategory((int) l);
+        presenter.setCategory(i);
     }
 
     @OnItemSelected(R.id.currency)
     void onItemSelectedOperationCurrency(AdapterView<?> adapterView, View view, int i, long l) {
-        presenter.setCurrency((int) l);
+        presenter.setCurrency(i);
     }
 
-    @OnClick({R.id.save, R.id.date})
-    void onClick(View v) {
-        int id = v.getId();
-        switch (id) {
-            case R.id.save:
-                presenter.save();
-                break;
-            case R.id.date:
-
-                break;
-        }
+    @OnClick(R.id.save)
+    void onClickSave(View v) {
+        presenter.save();
     }
 
     @OnTextChanged(R.id.comment)

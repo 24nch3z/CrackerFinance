@@ -16,7 +16,6 @@ import ru.s4nchez.crackerfinance.model.currency.Currency;
 public class OperationCreatorPresenter extends BasePresenter<ViewContract> {
 
     private OperationCreatorModel model;
-//    private Repository repository;
     private Account account;
 
     public OperationCreatorPresenter(OperationCreatorModel model, Account account) {
@@ -55,7 +54,7 @@ public class OperationCreatorPresenter extends BasePresenter<ViewContract> {
     }
 
     public void initOperationType() {
-        List<String> list = new ArrayList<>(Arrays.asList(new String[] { "Расход", "Доход" }));
+        List<String> list = new ArrayList<>(Arrays.asList("Расход", "Доход"));
         int selection = 0;
         view.initOperationType(list, selection);
     }
@@ -70,10 +69,6 @@ public class OperationCreatorPresenter extends BasePresenter<ViewContract> {
         List<String> currencyList = model.getCategoryList();
         int selection = 0;
         view.initCategory(currencyList, selection);
-    }
-
-    public void initDate() {
-        view.setDate("Дата операции");
     }
 
     public void setCurrency(int position) {
@@ -93,7 +88,6 @@ public class OperationCreatorPresenter extends BasePresenter<ViewContract> {
     public boolean checkForSave() {
         boolean isError = false;
 
-        // TODO: Проверить, что сумма была не слишком большой и чтобы больше нуля
         if (model.getOperation().getSum() <= 0) {
             view.showSumError(R.string.operation_creator_error_sum_empty);
             isError = true;

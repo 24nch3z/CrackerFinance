@@ -24,7 +24,7 @@ public class FragmentMainScreen extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main_screen, container, false);
 
-        adapter = new SampleFragmentPagerAdapter(getChildFragmentManager());
+        adapter = new SampleFragmentPagerAdapter(getChildFragmentManager(), getContext());
         ViewPager viewPager = v.findViewById(R.id.viewPager);
         viewPager.setAdapter(adapter);
         TabLayout tabLayout = v.findViewById(R.id.tabLayout);

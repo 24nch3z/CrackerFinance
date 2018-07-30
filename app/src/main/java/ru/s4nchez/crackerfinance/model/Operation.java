@@ -15,7 +15,10 @@ public class Operation {
     private Date operationDate;
     private Category category;
 
-    public Operation() {};
+    public Operation() {
+    }
+
+    ;
 
     public Operation(OperationType type, Currency currency, double sum) {
         this.sum = sum;
@@ -23,28 +26,28 @@ public class Operation {
         this.type = type;
     }
 
-    public void setSum(double sum) {
-        this.sum = sum;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
-    }
-
-    public void setType(OperationType type) {
-        this.type = type;
-    }
-
     public double getSum() {
         return sum;
+    }
+
+    public void setSum(double sum) {
+        this.sum = sum;
     }
 
     public Currency getCurrency() {
         return currency;
     }
 
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
     public OperationType getType() {
         return type;
+    }
+
+    public void setType(OperationType type) {
+        this.type = type;
     }
 
     public String getComment() {

@@ -20,7 +20,7 @@
                 android:id="@+id/sum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Сумма"
+                android:hint="@string/operation_creator_sum"
                 android:inputType="numberDecimal"
                 android:maxLength="6"
                 android:singleLine="true"
@@ -43,7 +43,7 @@
             style="@style/spinnerLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Тип операции"/>
+            android:text="@string/operation_creator_operation_type"/>
 
         <Spinner
             android:id="@+id/operationType"
@@ -55,7 +55,7 @@
             style="@style/spinnerLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Валюта"/>
+            android:text="@string/operation_creator_currency"/>
 
         <Spinner
             android:id="@+id/currency"
@@ -68,21 +68,13 @@
             style="@style/spinnerLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Категория"/>
+            android:text="@string/operation_creator_category"/>
 
         <Spinner
             android:id="@+id/category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/operation_creator_field_margin"/>
-
-        <Button
-            android:id="@+id/date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/operation_creator_field_margin"
-            android:visibility="gone"
-            tool:text="28.07.2018 / Дата операции"/>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -93,7 +85,7 @@
                 android:id="@+id/comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Комментарий"
+                android:hint="@string/operation_creator_comment"
                 android:textSize="16sp"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -101,6 +93,6 @@
             android:id="@+id/save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Сохранить"/>
+            android:text="@string/operation_creator_save"/>
     </LinearLayout>
 </ScrollView>
