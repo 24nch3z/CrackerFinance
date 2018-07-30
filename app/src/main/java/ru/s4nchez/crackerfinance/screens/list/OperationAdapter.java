@@ -17,12 +17,10 @@ public class OperationAdapter extends RecyclerView.Adapter<OperationHolder> {
 
     private List<Operation> items;
     private Context context;
-    private AppViewModel viewModel;
 
-    public OperationAdapter(List<Operation> items, Context context, AppViewModel viewModel) {
+    public OperationAdapter(List<Operation> items, Context context) {
         this.items = items;
         this.context = context;
-        this.viewModel = viewModel;
     }
 
     public void setItems(List<Operation> items) {
@@ -40,7 +38,7 @@ public class OperationAdapter extends RecyclerView.Adapter<OperationHolder> {
     @Override
     public void onBindViewHolder(OperationHolder holder, int position) {
         Operation operation = items.get(position);
-        holder.bind(operation, position, viewModel);
+        holder.bind(operation);
     }
 
     @Override

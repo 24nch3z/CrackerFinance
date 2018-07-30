@@ -23,6 +23,7 @@ public class OperationsListFragment extends Fragment {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
     private Account account;
     private OperationAdapter adapter;
     private AppViewModel viewModel;
@@ -56,7 +57,7 @@ public class OperationsListFragment extends Fragment {
     }
 
     private void initViews(View v) {
-        adapter = new OperationAdapter(account.getOperations(), getContext(), viewModel);
+        adapter = new OperationAdapter(account.getOperations(), getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new MyItemDecoration(
                 (int) getResources().getDimension(R.dimen.main_screen_recycler_view_margin)));
