@@ -6,16 +6,15 @@ import ru.s4nchez.crackerfinance.utils.MySharedPref;
 
 public class Settings {
 
-    private static final Settings sSettings = new Settings();
+    private static final Settings instance = new Settings();
 
     private static final String CURRENCY = "CURRENCY";
     private static final String DEFAULT_CURRENCY = "RUB";
 
-    private Settings() {
-    }
+    private Settings() {}
 
     public static Settings get() {
-        return sSettings;
+        return instance;
     }
 
     public void setCurrency(Context c, String currency) {

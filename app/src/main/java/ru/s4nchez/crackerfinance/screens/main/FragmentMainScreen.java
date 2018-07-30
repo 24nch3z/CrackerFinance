@@ -1,49 +1,41 @@
 package ru.s4nchez.crackerfinance.screens.main;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import ru.s4nchez.crackerfinance.R;
-import ru.s4nchez.crackerfinance.databinding.FragmentMainScreenBinding;
-import ru.s4nchez.crackerfinance.model.Cracker;
-import ru.s4nchez.crackerfinance.model.Repository;
-import ru.s4nchez.crackerfinance.screens.main.list.MyItemDecoration;
-import ru.s4nchez.crackerfinance.screens.main.list.OperationAdapter;
 
 public class FragmentMainScreen extends Fragment {
 
-    private MainScreenViewModel mViewModel;
-    private Model mModel;
-    private Cracker mCracker;
-    private Repository mRepository = Repository.get();
+    private SampleFragmentPagerAdapter adapter;
 
     public static FragmentMainScreen newInstance() {
-        FragmentMainScreen fragment = new FragmentMainScreen();
-        return fragment;
+        return new FragmentMainScreen();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentMainScreenBinding binding = DataBindingUtil
-                .inflate(inflater, R.layout.fragment_main_screen, container, false);
+        View v = inflater.inflate(R.layout.fragment_main_screen, container, false);
 
-        mCracker = new Cracker();
-        mModel = new Model(mCracker, mRepository, getContext());
-        mViewModel = new MainScreenViewModel(mModel);
-        binding.setViewModel(mViewModel);
+        adapter = new SampleFragmentPagerAdapter(getChildFragmentManager(), getContext());
+        ViewPager viewPager = v.findViewById(R.id.viewPager);
+        viewPager.setAdapter(adapter);
+        TabLayout tabLayout = v.findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(viewPager);
 
-        binding.recyclerView.setLayoutManager(
-                new LinearLayoutManager(getActivity()));
-        binding.recyclerView.addItemDecoration(new MyItemDecoration(20));
-        binding.recyclerView.setAdapter(new OperationAdapter(
-                mRepository.getOperations(), getContext()));
+        initToolbar();
 
-        return binding.getRoot();
+        return v;
+    }
+
+    private void initToolbar() {
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Главная");
     }
 }

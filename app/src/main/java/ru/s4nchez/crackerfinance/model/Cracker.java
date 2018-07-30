@@ -6,17 +6,17 @@ import ru.s4nchez.crackerfinance.model.currency.Currency;
 
 public class Cracker {
 
-    private Converter mConverter;
+    private Converter converter;
 
     public Cracker() {
-        mConverter = new Converter();
+        converter = new Converter();
     }
 
     public double getTotal(Currency currency, List<Operation> operations) {
         double total = 0, operationSum;
 
         for (Operation operation : operations) {
-            operationSum = mConverter.converter(operation.getCurrency(),
+            operationSum = converter.converter(operation.getCurrency(),
                     currency, operation.getSum());
 
             switch (operation.getType()) {

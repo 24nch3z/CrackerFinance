@@ -1,4 +1,4 @@
-package ru.s4nchez.crackerfinance.screens.main.list;
+package ru.s4nchez.crackerfinance.screens.list;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
@@ -7,15 +7,15 @@ import ru.s4nchez.crackerfinance.model.Operation;
 
 public class OperationViewModel extends BaseObservable {
 
-    private Operation mOperation;
+    private Operation operation;
 
     @Bindable
     public Operation getOperation() {
-        return mOperation;
+        return operation;
     }
 
     public void setOperation(Operation operation) {
-        mOperation = operation;
+        this.operation = operation;
         notifyChange();
     }
 }
