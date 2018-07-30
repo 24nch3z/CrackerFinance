@@ -1,29 +1,99 @@
 package ru.s4nchez.crackerfinance.model.currency;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Currencies {
 
-    private static Currencies sCurrencies;
+    private static Currencies instance;
 
-    private Currency mRuble;
-    private Currency mDollar;
+    private List<Currency> currencies;
+
+    private Currency ruble = new Currency("Рубль", "RUB", "\u20BD");
+    private Currency dollar = new Currency("Доллар", "USD", "$");
+    private Currency euro = new Currency("Евро", "EUR", "€");
 
     private Currencies() {
-        mRuble = new CurrencyRuble();
-        mDollar = new CurrencyDollar();
-    };
+        currencies = new ArrayList<>();
+        currencies.add(ruble);
+        currencies.add(dollar);
+        currencies.add(euro);
+    }
 
     public static Currencies get() {
-        if (sCurrencies == null) {
-            sCurrencies = new Currencies();
+        if (instance == null) {
+            instance = new Currencies();
         }
-        return sCurrencies;
+        return instance;
     }
 
     public Currency ruble() {
-        return mRuble;
+        return ruble;
     }
 
     public Currency dollar() {
-        return mDollar;
+        return dollar;
+    }
+
+    public Currency euro() {
+        return euro;
+    }
+
+    public List<String> getCurrencyNames() {
+        List<String> labels = new ArrayList<>(currencies.size());
+        for (Currency c : currencies) {
+            labels.add(c.getName());
+        }
+        return labels;
+    }
+
+    public String getCodeByName(String name) {
+        for (Currency c : currencies) {
+            if (name.equals(c.getName())) {
+                return c.getCode();
+            }
+        }
+        return null;
+    }
+
+    public String getNameByCode(String code) {
+        for (Currency c : currencies) {
+            if (code.equals(c.getCode())) {
+                return c.getName();
+            }
+        }
+        return null;
+    }
+
+    public List<Currency> getCurrencies() {
+        return currencies;
+    }
+
+    public Currency getCurrencyByCode(String code) {
+        for (Currency currency : Currencies.get().getCurrencies()) {
+            if (code.equalsIgnoreCase(currency.getCode())) {
+                return currency;
+            }
+        }
+        return null;
+    }
+
+    public Currency getCurrencyByName(String name) {
+        for (Currency currency : Currencies.get().getCurrencies()) {
+            if (name.equalsIgnoreCase(currency.getName())) {
+                return currency;
+            }
+        }
+        return null;
+    }
+
+    public List<Currency> getCurrenciesExceptOne(Currency currency) {
+        List<Currency> list = new ArrayList<>();
+        for (Currency current : currencies) {
+            if (!currency.getCode().equals(current.getCode())) {
+                list.add(current);
+            }
+        }
+        return list;
     }
 }

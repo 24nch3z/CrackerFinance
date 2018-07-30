@@ -1,36 +1,41 @@
 package ru.s4nchez.crackerfinance.screens.main;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import ru.s4nchez.crackerfinance.R;
-import ru.s4nchez.crackerfinance.databinding.FragmentMainScreenBinding;
-import ru.s4nchez.crackerfinance.model.Cracker;
 
 public class FragmentMainScreen extends Fragment {
 
-    private MainScreenViewModel mViewModel;
-    private Cracker mCracker;
+    private SampleFragmentPagerAdapter adapter;
 
     public static FragmentMainScreen newInstance() {
-        FragmentMainScreen fragment = new FragmentMainScreen();
-        return fragment;
+        return new FragmentMainScreen();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentMainScreenBinding binding = DataBindingUtil
-                .inflate(inflater, R.layout.fragment_main_screen, container, false);
+        View v = inflater.inflate(R.layout.fragment_main_screen, container, false);
 
-        mCracker = new Cracker();
-        mViewModel = new MainScreenViewModel(mCracker);
-        binding.setViewModel(mViewModel);
+        adapter = new SampleFragmentPagerAdapter(getChildFragmentManager(), getContext());
+        ViewPager viewPager = v.findViewById(R.id.viewPager);
+        viewPager.setAdapter(adapter);
+        TabLayout tabLayout = v.findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(viewPager);
 
-        return binding.getRoot();
+        initToolbar();
+
+        return v;
+    }
+
+    private void initToolbar() {
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Главная");
     }
 }

@@ -2,11 +2,6 @@ package ru.s4nchez.crackerfinance;
 
 import org.junit.Test;
 
-import ru.s4nchez.crackerfinance.model.Cracker;
-import ru.s4nchez.crackerfinance.model.Operation;
-import ru.s4nchez.crackerfinance.model.OperationType;
-import ru.s4nchez.crackerfinance.model.currency.CurrencyRuble;
-
 import static org.junit.Assert.*;
 
 /**

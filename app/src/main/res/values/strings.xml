@@ -1,13 +1,34 @@
 <resources>
-    <string name="app_name">Крекер финансов</string>
+    <string name="app_name">Крекер</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
-    <string name="nav_item_main">Главная</string>
-    <string name="nav_item_about">О приложении</string>
-    <string name="nav_item_settings">Настройки</string>
+    <string name="nav_header_title">Крекер финансов</string>
+    <string name="section_main">Главная</string>
+    <string name="section_about">О приложении</string>
+    <string name="section_settings">Настройки</string>
 
-    <string name="main_screen_title">Ваш баланс</string>
+    <string name="main_screen_account_title">Счет:</string>
+    <string name="main_screen_rates_title">Курс валюты:</string>
+    <string name="main_screen_change_account">Сменить счет</string>
+    <string name="main_screen_change_currency">Сменить валюту</string>
+
+    <string name="main_screen_tab_main">Основное</string>
+    <string name="main_screen_tab_operations">Операции</string>
+
+    <string name="about_screen_version">Версия приложения:</string>
+    <string name="about_screen_title_part1">К</string>
+    <string name="about_screen_title_part2">реке₽ финансов</string>
+
+    <string name="settings_screen_currency">Основная валюта</string>
+
+    <string name="operation_creator_toolbar_title">Создание операции</string>
+    <string name="operation_creator_error_sum_empty">Необходимо ввести сумму</string>
+    <string name="operation_creator_sum">Сумма</string>
+    <string name="operation_creator_operation_type">Тип операция</string>
+    <string name="operation_creator_currency">Валюта</string>
+    <string name="operation_creator_category">Категория</string>
+    <string name="operation_creator_comment">Комментарий</string>
+    <string name="operation_creator_save">Сохранить</string>
+    <string name="operation_creator_save_success">Операция успешно создана</string>
 </resources>
