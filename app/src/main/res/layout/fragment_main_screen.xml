@@ -1,53 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tool="http://schemas.android.com/tools">
-
-    <data>
-        <variable
-            name="viewModel"
-            type="ru.s4nchez.crackerfinance.screens.main.MainScreenViewModel"/>
-    </data>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|center_horizontal"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/main_screen_title_bottom_margin"
-                android:gravity="center"
-                android:text="Ваш баланс"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/main_screen_title_size"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text='@{(int) viewModel.model.total + viewModel.model.currency.symbol}'
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/main_screen_balance_size"
-                android:textStyle="bold"
-                tool:text="136$"/>
-        </LinearLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/main_screen_title_bottom_margin"
+            android:gravity="center"
+            android:text="Ваш баланс"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/main_screen_title_size"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewBudget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/main_screen_balance_size"
+            android:textStyle="bold"
+            tool:text="136$"/>
     </LinearLayout>
 
-</layout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"/>
+</LinearLayout>

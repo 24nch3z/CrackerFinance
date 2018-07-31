@@ -4,9 +4,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="nav_header_title">Крекер финансов</string>
-    <string name="nav_item_main">Главная</string>
-    <string name="nav_item_about">О приложении</string>
-    <string name="nav_item_settings">Настройки</string>
+    <string name="section_main">Главная</string>
+    <string name="section_about">О приложении</string>
+    <string name="section_settings">Настройки</string>
 
     <string name="main_screen_title">Ваш баланс</string>
 

@@ -2,57 +2,75 @@ package ru.s4nchez.crackerfinance.model;
 
 import java.util.Date;
 
+import ru.s4nchez.crackerfinance.model.category.Category;
 import ru.s4nchez.crackerfinance.model.currency.Currency;
 
 public class Operation {
 
-    private double mSum;
-    private Currency mCurrency;
-    private OperationType mType;
-
-    private String mDescription;
-    private String mName;
-    private Date mDate;
+    final private double sum;
+    final private Currency currency;
+    final private OperationType type;
+    private String description;
+    private String name;
+    private Date creatingDate;
+    private Date operationDate;
+    private Category category;
 
     public Operation(OperationType type, Currency currency, double sum) {
-        mSum = sum;
-        mCurrency = currency;
-        mType = type;
+        this.sum = sum;
+        this.currency = currency;
+        this.type = type;
     }
 
     public double getSum() {
-        return mSum;
+        return sum;
     }
 
     public Currency getCurrency() {
-        return mCurrency;
+        return currency;
     }
 
     public OperationType getType() {
-        return mType;
+        return type;
     }
 
     public String getDescription() {
-        return mDescription;
+        return description;
     }
 
     public void setDescription(String description) {
-        mDescription = description;
+        this.description = description;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public void setName(String name) {
-        mName = name;
+        this.name = name;
     }
 
-    public Date getDate() {
-        return mDate;
+    public Date getCreatingDate() {
+        return creatingDate;
     }
 
-    public void setDate(Date date) {
-        mDate = date;
+    public void setCreatingDate(Date creatingDate) {
+        this.creatingDate = creatingDate;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Date getOperationDate() {
+        return operationDate;
+    }
+
+    public void setOperationDate(Date operationDate) {
+        this.operationDate = operationDate;
     }
 }

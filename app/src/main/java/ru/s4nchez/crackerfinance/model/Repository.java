@@ -1,62 +1,81 @@
 package ru.s4nchez.crackerfinance.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import ru.s4nchez.crackerfinance.model.currency.Currencies;
 
 public class Repository {
 
-    private static Repository sRepository;
+    private static Repository instance;
 
-    private List<Operation> mOperations;
+    private List<Operation> operations;
 
     private Repository() {
-        mOperations = new ArrayList<>();
-        mOperations.add(new Operation(OperationType.income,
+        operations = new ArrayList<>();
+        operations.add(new Operation(OperationType.income,
                 Currencies.get().ruble(), 25000));
-        mOperations.add(new Operation(OperationType.cost,
+        operations.add(new Operation(OperationType.cost,
                 Currencies.get().ruble(), 350));
-        mOperations.add(new Operation(OperationType.cost,
+        operations.add(new Operation(OperationType.cost,
                 Currencies.get().ruble(), 150));
-        mOperations.add(new Operation(OperationType.cost,
+        operations.add(new Operation(OperationType.cost,
                 Currencies.get().ruble(), 55));
-        mOperations.add(new Operation(OperationType.cost,
+        operations.add(new Operation(OperationType.cost,
                 Currencies.get().ruble(), 440));
-        mOperations.add(new Operation(OperationType.cost,
+        operations.add(new Operation(OperationType.cost,
                 Currencies.get().ruble(), 315));
-        mOperations.add(new Operation(OperationType.income,
+        operations.add(new Operation(OperationType.income,
                 Currencies.get().ruble(), 30));
-        mOperations.add(new Operation(OperationType.cost,
+        operations.add(new Operation(OperationType.cost,
                 Currencies.get().ruble(), 1193));
-        mOperations.add(new Operation(OperationType.cost,
+        operations.add(new Operation(OperationType.cost,
                 Currencies.get().ruble(), 550));
-        mOperations.add(new Operation(OperationType.income,
+        operations.add(new Operation(OperationType.income,
                 Currencies.get().ruble(), 550));
-        mOperations.add(new Operation(OperationType.cost,
+        operations.add(new Operation(OperationType.cost,
                 Currencies.get().ruble(), 123));
-        mOperations.add(new Operation(OperationType.cost,
+        operations.add(new Operation(OperationType.cost,
                 Currencies.get().ruble(), 12));
-        mOperations.add(new Operation(OperationType.cost,
+        operations.add(new Operation(OperationType.cost,
                 Currencies.get().ruble(), 500));
-        mOperations.add(new Operation(OperationType.cost,
+        operations.add(new Operation(OperationType.cost,
                 Currencies.get().ruble(), 540));
-    }
-
-    ;
+    };
 
     public static Repository get() {
-        if (sRepository == null) {
-            sRepository = new Repository();
+        if (instance == null) {
+            instance = new Repository();
         }
-        return sRepository;
+        return instance;
     }
 
     public void addOperation(Operation o) {
-        mOperations.add(o);
+        operations.add(o);
     }
 
     public List<Operation> getOperations() {
-        return mOperations;
+        return operations;
+    }
+
+    public List<Operation> getCosts() {
+        List<Operation> list = new ArrayList<>();
+        for (Operation operation : operations) {
+            if (operation.getType() == OperationType.cost) {
+                list.add(operation);
+            }
+        }
+        return list;
+    }
+
+    public List<Operation> getIncomes() {
+        List<Operation> list = new ArrayList<>();
+        for (Operation operation : operations) {
+            if (operation.getType() == OperationType.income) {
+                list.add(operation);
+            }
+        }
+        return list;
     }
 }

@@ -1,26 +1,26 @@
 package ru.s4nchez.crackerfinance.screens.main;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import ru.s4nchez.crackerfinance.R;
-import ru.s4nchez.crackerfinance.databinding.FragmentMainScreenBinding;
-import ru.s4nchez.crackerfinance.model.Cracker;
 import ru.s4nchez.crackerfinance.model.Repository;
 import ru.s4nchez.crackerfinance.screens.main.list.MyItemDecoration;
 import ru.s4nchez.crackerfinance.screens.main.list.OperationAdapter;
 
-public class FragmentMainScreen extends Fragment {
+public class FragmentMainScreen extends Fragment implements ViewContract {
 
-    private MainScreenViewModel mViewModel;
-    private Model mModel;
-    private Cracker mCracker;
-    private Repository mRepository = Repository.get();
+    private Repository repository;
+    private MainScreenPresenter presenter;
+    private TextView textViewBudget;
+    private RecyclerView recyclerView;
+    private OperationAdapter adapter;
 
     public static FragmentMainScreen newInstance() {
         FragmentMainScreen fragment = new FragmentMainScreen();
@@ -30,20 +30,40 @@ public class FragmentMainScreen extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentMainScreenBinding binding = DataBindingUtil
-                .inflate(inflater, R.layout.fragment_main_screen, container, false);
+        View v = inflater.inflate(R.layout.fragment_main_screen, container, false);
+        repository = Repository.get();
+        presenter = new MainScreenPresenter(new
+                MainScreenModel(getContext().getApplicationContext(), repository));
+        initViews(v);
+        return v;
+    }
 
-        mCracker = new Cracker();
-        mModel = new Model(mCracker, mRepository, getContext());
-        mViewModel = new MainScreenViewModel(mModel);
-        binding.setViewModel(mViewModel);
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.attachView(this);
+        presenter.setBudget();
+    }
 
-        binding.recyclerView.setLayoutManager(
-                new LinearLayoutManager(getActivity()));
-        binding.recyclerView.addItemDecoration(new MyItemDecoration(20));
-        binding.recyclerView.setAdapter(new OperationAdapter(
-                mRepository.getOperations(), getContext()));
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.detachView();
+    }
 
-        return binding.getRoot();
+    private void initViews(View v) {
+        textViewBudget = v.findViewById(R.id.textViewBudget);
+        recyclerView = v.findViewById(R.id.recyclerView);
+
+        adapter = new OperationAdapter(repository.getOperations(), getContext());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.addItemDecoration(new MyItemDecoration(
+                (int) getResources().getDimension(R.dimen.main_screen_recycler_view_margin)));
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void setBudget(String budget) {
+        textViewBudget.setText(budget);
     }
 }

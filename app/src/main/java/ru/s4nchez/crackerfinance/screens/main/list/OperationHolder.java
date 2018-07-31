@@ -7,16 +7,16 @@ import ru.s4nchez.crackerfinance.model.Operation;
 
 public class OperationHolder extends RecyclerView.ViewHolder {
 
-    private ItemOperationBinding mBinding;
+    private ItemOperationBinding binding;
 
     public OperationHolder(ItemOperationBinding binding) {
         super(binding.getRoot());
-        mBinding = binding;
-        mBinding.setViewModel(new OperationViewModel());
+        this.binding = binding;
+        this.binding.setViewModel(new OperationViewModel());
     }
 
     public void bind(Operation operation) {
-        mBinding.getViewModel().setOperation(operation);
-        mBinding.executePendingBindings();
+        binding.getViewModel().setOperation(operation);
+        binding.executePendingBindings();
     }
 }

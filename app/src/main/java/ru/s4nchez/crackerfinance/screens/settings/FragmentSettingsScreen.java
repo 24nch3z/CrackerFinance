@@ -12,10 +12,10 @@ import android.widget.Spinner;
 import java.util.List;
 
 import ru.s4nchez.crackerfinance.R;
-import ru.s4nchez.crackerfinance.Settings;
-import ru.s4nchez.crackerfinance.model.currency.Currencies;
 
-public class FragmentSettingsScreen extends Fragment {
+public class FragmentSettingsScreen extends Fragment implements ViewContract {
+
+    private SettingsScreenPresenter presenter;
 
     public static FragmentSettingsScreen newInstance() {
         FragmentSettingsScreen fragment = new FragmentSettingsScreen();
@@ -26,40 +26,41 @@ public class FragmentSettingsScreen extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings_screen, container, false);
-        initCurrencySpinner(view);
+        presenter = new SettingsScreenPresenter(new SettingsScreenModel());
         return view;
     }
 
-    private void initCurrencySpinner(View view) {
-        final List<String> currencyList = Currencies.get().getCurrencyNames();
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.attachView(this);
+        presenter.initCurrencySpinner(getContext());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.detachView();
+    }
+
+    @Override
+    public void initCurrencySpinner(List<String> currencyList, int defaultPosition) {
+        Spinner spinner = getView().findViewById(R.id.spinnerCurrency);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item, currencyList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner spinner = view.findViewById(R.id.spinnerCurrency);
         spinner.setAdapter(adapter);
-
-        String valueCode = Settings.get().getCurrency(getContext());
-        String valueName = Currencies.get().getNameByCode(valueCode);
-        int valuePosition = 0;
-        for (int i = 0; i < currencyList.size(); i++) {
-            if (currencyList.get(i).equalsIgnoreCase(valueName)) {
-                valuePosition = i;
-                break;
-            }
-        }
-        spinner.setSelection(valuePosition);
+        spinner.setSelection(defaultPosition);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String currencyName = currencyList.get(i);
-                String currencyCode = Currencies.get().getCodeByName(currencyName);
-                Settings.get().setCurrency(getContext(), currencyCode);
+                presenter.onChooseNewCurrency(i, getContext());
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
+            public void onNothingSelected(AdapterView<?> adapterView) {}
         });
     }
 }
