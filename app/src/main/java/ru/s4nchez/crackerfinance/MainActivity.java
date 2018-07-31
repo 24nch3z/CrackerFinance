@@ -10,10 +10,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import ru.s4nchez.crackerfinance.screens.about.FragmentAboutScreen;
 import ru.s4nchez.crackerfinance.screens.main.FragmentMainScreen;
+import ru.s4nchez.crackerfinance.screens.operation.OperationCreatorFragment;
 import ru.s4nchez.crackerfinance.screens.settings.FragmentSettingsScreen;
 import ru.s4nchez.crackerfinance.utils.MyToast;
 import ru.terrakok.cicerone.Navigator;
@@ -23,6 +23,37 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
+    private Navigator navigator = new SupportFragmentNavigator(getSupportFragmentManager(),
+            R.id.container) {
+        @Override
+        protected Fragment createFragment(String screenKey, Object data) {
+            switch (screenKey) {
+                case Screens.SCREEN_MAIN:
+                    setToolbarText(getString(R.string.section_main));
+                    return FragmentMainScreen.newInstance();
+                case Screens.SCREEN_ABOUT:
+                    setToolbarText(getString(R.string.section_about));
+                    return FragmentAboutScreen.newInstance();
+                case Screens.SCREEN_SETTINGS:
+                    setToolbarText(getString(R.string.section_settings));
+                    return FragmentSettingsScreen.newInstance();
+                case Screens.SCREEN_OPERATION_CREATOR:
+                    return OperationCreatorFragment.newInstance();
+                default:
+                    return FragmentMainScreen.newInstance();
+            }
+        }
+
+        @Override
+        protected void showSystemMessage(String message) {
+            MyToast.get(MainActivity.this).show(message);
+        }
+
+        @Override
+        protected void exit() {
+            finish();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +77,26 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    private void setFragment(Fragment fragment) {
+        FragmentManager fm = getSupportFragmentManager();
+
+        fm.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container);
+            if (fragment != null && fragment instanceof OnBackPressedListener) {
+                ((OnBackPressedListener) fragment).onBackPressed();
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
@@ -68,48 +112,17 @@ public class MainActivity extends AppCompatActivity
         MyApplication.instance.getNavigatorHolder().removeNavigator();
     }
 
-    private Navigator navigator = new SupportFragmentNavigator(getSupportFragmentManager(),
-            R.id.container) {
-        @Override
-        protected Fragment createFragment(String screenKey, Object data) {
-            getSupportActionBar().setTitle(screenKey);
-            switch(screenKey) {
-                case Screens.SCREEN_MAIN:
-                    setToolbarText(getString(R.string.section_main));
-                    return FragmentMainScreen.newInstance();
-                case Screens.SCREEN_ABOUT:
-                    setToolbarText(getString(R.string.section_about));
-                    return FragmentAboutScreen.newInstance();
-                case Screens.SCREEN_SETTINGS:
-                    setToolbarText(getString(R.string.section_settings));
-                    return FragmentSettingsScreen.newInstance();
-                default:
-                    return FragmentMainScreen.newInstance();
-            }
-        }
-
-        @Override
-        protected void showSystemMessage(String message) {
-            MyToast.get(MainActivity.this).show(message);
-        }
-
-        @Override
-        protected void exit() {
-            finish();
-        }
-    };
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.nav_main) {
-            MyApplication.instance.getRouter().replaceScreen(Screens.SCREEN_MAIN);
+            MyApplication.instance.getRouter().newRootScreen(Screens.SCREEN_MAIN);
         } else if (id == R.id.nav_settings) {
-            MyApplication.instance.getRouter().replaceScreen(Screens.SCREEN_SETTINGS);
+            MyApplication.instance.getRouter().newRootScreen(Screens.SCREEN_SETTINGS);
         } else if (id == R.id.nav_about) {
-            MyApplication.instance.getRouter().replaceScreen(Screens.SCREEN_ABOUT);
+            MyApplication.instance.getRouter().newRootScreen(Screens.SCREEN_ABOUT);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

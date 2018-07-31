@@ -12,7 +12,13 @@ public class Rates {
     private Rates() {
         data = new HashMap<>();
         data.put("RUB-USD", 0.016d);
+        data.put("RUB-EUR", 0.014d);
+
+        data.put("EUR-RUB", 73.34d);
+        data.put("EUR-USD", 1.17d);
+
         data.put("USD-RUB", 63.28d);
+        data.put("USD-EUR", 0.86d);
     }
 
     public static Rates get() {
@@ -20,6 +26,10 @@ public class Rates {
             instance = new Rates();
         }
         return instance;
+    }
+
+    public void clear() {
+        data.clear();
     }
 
     public Map<String, Double> getData() {

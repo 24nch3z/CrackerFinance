@@ -1,4 +1,4 @@
-package ru.s4nchez.crackerfinance.screens.main.list;
+package ru.s4nchez.crackerfinance.screens.list;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -11,6 +11,7 @@ import java.util.List;
 import ru.s4nchez.crackerfinance.R;
 import ru.s4nchez.crackerfinance.databinding.ItemOperationBinding;
 import ru.s4nchez.crackerfinance.model.Operation;
+import ru.s4nchez.crackerfinance.vm.AppViewModel;
 
 public class OperationAdapter extends RecyclerView.Adapter<OperationHolder> {
 
@@ -20,6 +21,10 @@ public class OperationAdapter extends RecyclerView.Adapter<OperationHolder> {
     public OperationAdapter(List<Operation> items, Context context) {
         this.items = items;
         this.context = context;
+    }
+
+    public void setItems(List<Operation> items) {
+        this.items = items;
     }
 
     @Override

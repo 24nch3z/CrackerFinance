@@ -3,10 +3,18 @@ package ru.s4nchez.crackerfinance.model.category;
 public class Category {
 
     final private String id;
-    final private String title;
+    final private String name;
 
-    public Category(String id, String title) {
+    public Category(String id, String name) {
         this.id = id;
-        this.title = title;
+        this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
     }
 }

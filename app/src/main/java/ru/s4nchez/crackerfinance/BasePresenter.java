@@ -11,4 +11,8 @@ public abstract class BasePresenter<T> {
     public void detachView() {
         this.view = null;
     }
+
+    public boolean hasView() {
+        return view != null ? true : false;
+    }
 }

@@ -11,11 +11,13 @@ public class Currencies {
 
     private Currency ruble = new Currency("Рубль", "RUB", "\u20BD");
     private Currency dollar = new Currency("Доллар", "USD", "$");
+    private Currency euro = new Currency("Евро", "EUR", "€");
 
     private Currencies() {
         currencies = new ArrayList<>();
         currencies.add(ruble);
         currencies.add(dollar);
+        currencies.add(euro);
     }
 
     public static Currencies get() {
@@ -31,6 +33,10 @@ public class Currencies {
 
     public Currency dollar() {
         return dollar;
+    }
+
+    public Currency euro() {
+        return euro;
     }
 
     public List<String> getCurrencyNames() {
@@ -70,5 +76,24 @@ public class Currencies {
             }
         }
         return null;
+    }
+
+    public Currency getCurrencyByName(String name) {
+        for (Currency currency : Currencies.get().getCurrencies()) {
+            if (name.equalsIgnoreCase(currency.getName())) {
+                return currency;
+            }
+        }
+        return null;
+    }
+
+    public List<Currency> getCurrenciesExceptOne(Currency currency) {
+        List<Currency> list = new ArrayList<>();
+        for (Currency current : currencies) {
+            if (!currency.getCode().equals(current.getCode())) {
+                list.add(current);
+            }
+        }
+        return list;
     }
 }

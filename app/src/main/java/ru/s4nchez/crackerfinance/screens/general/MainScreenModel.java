@@ -1,21 +1,21 @@
-package ru.s4nchez.crackerfinance.screens.main;
+package ru.s4nchez.crackerfinance.screens.general;
 
 import android.content.Context;
 
 import ru.s4nchez.crackerfinance.Settings;
+import ru.s4nchez.crackerfinance.model.Account;
 import ru.s4nchez.crackerfinance.model.Cracker;
-import ru.s4nchez.crackerfinance.model.Repository;
 import ru.s4nchez.crackerfinance.model.currency.Currencies;
 import ru.s4nchez.crackerfinance.model.currency.Currency;
 
 public class MainScreenModel {
 
     private Cracker cracker;
-    private Repository repository;
+    private Account account;
     private Currency currency;
 
-    public MainScreenModel(Context context, Repository repository) {
-        this.repository = repository;
+    public MainScreenModel(Context context, Account account) {
+        this.account = account;
         cracker = new Cracker();
         initCurrency(context);
     }
@@ -27,10 +27,18 @@ public class MainScreenModel {
     }
 
     public double getTotal() {
-        return cracker.getTotal(currency, repository.getOperations());
+        return cracker.getTotal(currency, account.getOperations());
+    }
+
+    public String getAccountName() {
+        return account.getName();
     }
 
     public Currency getCurrentCurrency() {
         return currency;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

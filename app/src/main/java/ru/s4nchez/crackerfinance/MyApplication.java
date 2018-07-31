@@ -9,6 +9,7 @@ import ru.terrakok.cicerone.Router;
 public class MyApplication extends Application {
 
     public static MyApplication instance;
+
     private Cicerone<Router> cicerone;
 
     @Override
