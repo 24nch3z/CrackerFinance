@@ -98,10 +98,10 @@ public class GeneralInformationFragment extends BaseFragment implements ViewCont
         String currentCurrencyStr = Settings.get().getCurrency(getActivity());
         final Currency currentCurrency = Currencies.get().getCurrencyByCode(currentCurrencyStr);
         final List<Currency> other = Currencies.get().getCurrenciesExceptOne(currentCurrency);
-        String q = helper.getCurrencyParamForRequest(currentCurrency, other);
+        String q = Helper.getCurrencyParamForRequest(currentCurrency, other);
 
         Request request = new Request.Builder()
-                .url(helper.getUrl(q))
+                .url(Helper.getUrl(q))
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -116,7 +116,7 @@ public class GeneralInformationFragment extends BaseFragment implements ViewCont
                 getActivity().runOnUiThread(() -> {
                     String result = "";
                     try {
-                        result = helper.getRatesStringForView(myResponse, currentCurrency, other);
+                        result = Helper.getRatesStringForView(myResponse, currentCurrency, other);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (IOException e) {

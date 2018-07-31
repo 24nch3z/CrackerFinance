@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 
 import java.util.List;
 
+import ru.s4nchez.crackerfinance.R;
 import ru.s4nchez.crackerfinance.vm.AppViewModel;
 
 public class ChangeAccountDialogFragment extends DialogFragment {
@@ -28,8 +29,8 @@ public class ChangeAccountDialogFragment extends DialogFragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         return new AlertDialog.Builder(getActivity())
-                .setTitle("Выберите счет")
-                .setPositiveButton("Закрыть", null)
+                .setTitle(getString(R.string.main_screen_dialog_title))
+                .setPositiveButton(getString(R.string.main_screen_dialog_positive_button), null)
                 .setAdapter(adapter, (dialogInterface, i) -> viewModel.setCurrentAccount(i))
                 .create();
     }

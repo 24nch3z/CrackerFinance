@@ -15,10 +15,7 @@ public class Operation {
     private Date operationDate;
     private Category category;
 
-    public Operation() {
-    }
-
-    ;
+    public Operation() { }
 
     public Operation(OperationType type, Currency currency, double sum) {
         this.sum = sum;

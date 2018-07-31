@@ -8,10 +8,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import ru.s4nchez.crackerfinance.R;
 
 public class FragmentMainScreen extends Fragment {
+
+    @BindView(R.id.viewPager)
+    ViewPager viewPager;
+
+    @BindView(R.id.tabLayout)
+    TabLayout tabLayout;
 
     private SampleFragmentPagerAdapter adapter;
 
@@ -23,11 +32,10 @@ public class FragmentMainScreen extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main_screen, container, false);
+        ButterKnife.bind(this, v);
 
         adapter = new SampleFragmentPagerAdapter(getChildFragmentManager(), getContext());
-        ViewPager viewPager = v.findViewById(R.id.viewPager);
         viewPager.setAdapter(adapter);
-        TabLayout tabLayout = v.findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
 
         initToolbar();
@@ -36,6 +44,7 @@ public class FragmentMainScreen extends Fragment {
     }
 
     private void initToolbar() {
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Главная");
+        ((AppCompatActivity) getActivity()).getSupportActionBar()
+                .setTitle(getString(R.string.section_main));
     }
 }

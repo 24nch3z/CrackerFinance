@@ -12,7 +12,7 @@ import java.util.List;
 import okhttp3.HttpUrl;
 import ru.s4nchez.crackerfinance.model.currency.Currency;
 
-public class helper {
+public class Helper {
 
     public static HttpUrl getUrl(String q) {
         HttpUrl.Builder url = new HttpUrl.Builder();
